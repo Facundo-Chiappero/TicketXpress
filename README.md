@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## ESPAÑOL:
 
-## Getting Started
+🚧 **Trabajo en progreso** – Este proyecto aún está en desarrollo.
 
-First, run the development server:
+# Plataforma de Entradas con Next.js
+
+Este es un proyecto de **venta de entradas para eventos** desarrollado con **Next.js**. Permite a los usuarios comprar entradas, ver sus eventos próximos y a los administradores gestionar eventos (crear, editar y eliminar).
+
+## Características
+
+- **Autenticación con NextAuth**:
+  - Iniciar sesión con **Google** o con **email + contraseña**.
+- **Compra de entradas** usando la API de **Mercado Pago**.
+- **Perfil de usuario**: los usuarios pueden ver los eventos que compraron y que aún no se realizaron.
+- **Panel de administrador**: permite crear, editar y eliminar eventos.
+- **Interfaz moderna y responsive** con Tailwind CSS.
+- **Base de datos gestionada con Prisma**.
+
+## Tecnologías usadas
+
+- **Next.js**: Framework para React con renderizado del lado del servidor.
+- **TypeScript**: Tipado estático para JavaScript.
+- **NextAuth.js**: Autenticación con múltiples proveedores.
+- **Prisma**: ORM para interactuar con la base de datos.
+- **Tailwind CSS**: Framework de estilos utilitario.
+- **Mercado Pago API**: Pasarela de pagos para realizar compras seguras.
+
+## Instalación
+
+Desde una terminal o cmd, ejecuta los siguientes comandos:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Facundo-Chiappero/events-manager.git
+cd events-manager
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Para tener una base de datos postgreSQL puedes usar la pagina [instagres.com](instagres.com) o la de tu preferencia, una vez tengas el connection string en un archivo en la raiz llamado `.env` debes incluir lo siguiente:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+DATABASE_URL=tu-base-de-datos-postgreSQL
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Luego de eso puedes correr
 
-## Learn More
+```bash
+npx prisma generate
+npx prisma migrate dev
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## ENGLISH:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> 🚧 **Work in progress** – This project is still under development.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Ticket Platform with Next.js
 
-## Deploy on Vercel
+This is a **ticket sales platform for events** built with **Next.js**. It allows users to purchase tickets, view upcoming events, and enables administrators to manage events (create, edit, and delete).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Authentication with NextAuth**:
+  - Sign in using **Google** or **email + password**.
+- **Ticket purchases** using the **Mercado Pago API**.
+- **User profile**: users can see the events they've purchased and that haven't taken place yet.
+- **Admin panel**: allows creation, editing, and deletion of events.
+- **Modern and responsive UI** with Tailwind CSS.
+- **Database management with Prisma**.
+
+## Technologies used
+
+- **Next.js**: React framework with server-side rendering.
+- **TypeScript**: Static typing for JavaScript.
+- **NextAuth.js**: Authentication with multiple providers.
+- **Prisma**: ORM to interact with the database.
+- **Tailwind CSS**: Utility-first CSS framework.
+- **Mercado Pago API**: Payment gateway for secure purchases.
+
+## Installation
+
+From a terminal or command prompt, run the following commands:
+
+```bash
+git clone https://github.com/Facundo-Chiappero/events-manager.git
+cd events-manager
+npm install
+```
+
+To set up a PostgreSQL database, you can use instagres.com or any provider of your choice. Once you have the connection string, create a `.env` file in the root directory and include the following:
+
+```bash
+DATABASE_URL=your-postgreSQL-database-url
+```
+
+After that, run the following:
+
+```bash
+npx prisma generate
+npx prisma migrate dev
+npm run dev
+```
