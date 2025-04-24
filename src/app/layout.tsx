@@ -1,11 +1,14 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Providers } from './providers'
-import { METADATA } from '@/constants/frontend'
+import { METADATA } from '@/constants/frontend/metadata'
 
 export const metadata: Metadata = {
-  title: METADATA.LAYOUT.TITLE,
-  description: METADATA.LAYOUT.DESCRIPTION,
+  title: {
+    default: METADATA.LAYOUTS.HOME.TITLE,
+    template: `${METADATA.LAYOUTS.HOME.TITLE} - %s`,
+  },
+  description: METADATA.LAYOUTS.HOME.DESCRIPTION,
 }
 
 export default function RootLayout({

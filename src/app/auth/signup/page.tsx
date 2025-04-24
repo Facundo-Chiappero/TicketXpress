@@ -4,9 +4,7 @@ import SignUpForm from '@/app/ui/forms/SignUpForm'
 export default function SignUpPage() {
   return (
     <>
-      <title>Events Manager - Sign Up</title>
-
-      <header>
+      <header className="absolute top-4 left-4">
         <GoHomeButton />
       </header>
       <SignUpForm />

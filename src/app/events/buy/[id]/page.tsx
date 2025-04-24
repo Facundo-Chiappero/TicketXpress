@@ -1,9 +1,11 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import GoHomeButton from '@/app/ui/buttons/GoHomeButton'
-import CheckOutButton from '@/components/payment/CheckOutButton'
+import Header from '@/app/ui/Header'
+import CheckOutButton from '@/app/ui/payment/CheckOutButton'
+import confirmSession from '@/lib/session/confirmSession'
 import { getEventById } from '@/lib/events'
-import { getServerSession } from 'next-auth'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
+import { PAGES } from '@/constants/frontend/pages'
+import { METADATA } from '@/constants/frontend/metadata'
+import { EVENT_CARD } from '@/constants/frontend/eventCard'
 
 interface Props {
   params: {
@@ -12,10 +14,9 @@ interface Props {
 }
 
 export default async function BuyEventPage({ params }: Props) {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    redirect(`/auth/login?eventsManagerCallbackUrl=/events/buy/${params.id}`)
-  }
+  const session = await confirmSession({
+    callback: PAGES.EVENTS.BUY(params.id),
+  })
 
   const event = await getEventById(params.id)
   if (!event || !event.title || !event.price) return notFound()
@@ -23,19 +24,19 @@ export default async function BuyEventPage({ params }: Props) {
   const userId = Number(session?.user.id)
 
   return (
-    <article>
-      <title>{`Events Manager - ${event.title}`}</title>
-      <header>
-        <GoHomeButton />
-      </header>
+    <>
+      <Header title={METADATA.LAYOUTS.EVENT.TITLE} user={session?.user} />
       <main className="py-20 px-12 flex flex-col">
         <section className="mb-6">
           <h1 className="text-3xl font-bold mb-4">{event.title}</h1>
           <p className="mb-2 text-gray-400">{event.description}</p>
           <p className="mb-2 text-gray-300">
-            Fecha: {new Date(event.date).toLocaleDateString()}
+            {EVENT_CARD.DATE_LABEL} {new Date(event.date).toLocaleDateString()}
           </p>
-          <p className="mb-4 text-xl font-semibold">Precio: ${event.price}</p>
+          <p className="mb-4 text-xl font-semibold">
+            {EVENT_CARD.PRICE_LABEL} {EVENT_CARD.DOLAR_SYMBOL}
+            {event.price}
+          </p>
         </section>
 
         <div className="flex flex-wrap gap-4">
@@ -43,8 +44,8 @@ export default async function BuyEventPage({ params }: Props) {
             <img
               key={idx}
               src={url}
-              alt={`Imagen ${idx + 1}: ${event.title}`}
-              className="rounded-lg  w-full max-w-[512px] object-cover h-48"
+              alt={EVENT_CARD.IMAGE_ALT(idx, event.title)}
+              className="rounded-lg w-full max-w-[512px] object-cover h-48"
             />
           ))}
         </div>
@@ -56,6 +57,6 @@ export default async function BuyEventPage({ params }: Props) {
           userId={userId}
         />
       </main>
-    </article>
+    </>
   )
 }

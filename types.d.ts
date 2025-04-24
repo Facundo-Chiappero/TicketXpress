@@ -9,6 +9,10 @@ export type User = {
 export type CurrentUser =
   | User | undefined
 
+export enum ROLES {
+  USER = 'USER',
+  ADMIN = 'ADMIN'
+}
 export type Event = {
   id: number;
   title: string;

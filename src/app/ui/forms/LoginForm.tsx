@@ -6,62 +6,61 @@ import AuthInput from './AuthInput'
 import AuthButton from '../buttons/AuthButton'
 import { Google } from '../icons/Google'
 import useAuthAction from '@/hooks/useAuthAction'
-import { useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import RedirectButton from '../buttons/RedirectButton'
+import ErrorMessage from './ErrorMessage'
+import { useState } from 'react'
+import PasswordInput from './PasswordInput'
+import { PARAMS } from '@/constants/frontend/params'
+import { LOGIN_FORM } from '@/constants/frontend/loginForm'
+import { PAGES } from '@/constants/frontend/pages'
 
 export default function LoginForm() {
-  const { handleSubmit, loading, error, setError, success, callbackUrl } =
+  const { handleSubmit, loading, error, success, callbackUrl } =
     useAuthAction()
+    const [passwordVisible, setPasswordVisible] = useState(false)
+  //used in Link tag
+  const callbackUrlWithPageUrl = callbackUrl
+    ? `?${PARAMS.AUTH_CALLBACK}=${encodeURIComponent(callbackUrl)}`
+    : ''
 
-  const searchParams = useSearchParams()
-  useEffect(() => {
-    const errorFromUrl = searchParams.get('googleautherror')
-    if (errorFromUrl) {
-      setError(errorFromUrl)
-    }
-  }, [searchParams, setError])
   return (
-    <AuthFormWrapper title="Iniciar sesión" loading={loading}>
+    <AuthFormWrapper title={LOGIN_FORM.TITLE} loading={loading}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
         <AuthInput
           name="email"
           type="email"
           required
           autoFocus
-          label="Email"
+          label={LOGIN_FORM.LABELS.EMAIL}
           autoComplete="email"
-        />
-        <AuthInput
-          name="password"
-          type="password"
-          required
-          label="Password"
-          autoComplete="current-password"
+          placeholder={LOGIN_FORM.PLACEHOLDERS.EMAIL}
         />
 
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        <PasswordInput label={LOGIN_FORM.LABELS.PASSWORD} updateVisibility={() => setPasswordVisible(prev => !prev)} passwordVisible={passwordVisible} placeholder={LOGIN_FORM.PLACEHOLDERS.PASSWORD}/>
+
+        {error && <ErrorMessage error={error}/>}
 
         {success && (
-          <p
-            className="text-green-700 text-sm"
-            dangerouslySetInnerHTML={{ __html: success }}
-          />
+          <>
+            <p className="text-green-700 text-sm">{success}</p>
+            <RedirectButton />
+          </>
         )}
 
         <p className="text-sm text-center">
-          ¿No tenés cuenta?{' '}
+          {LOGIN_FORM.BUTTONS.REDIRECT_TEXT}{' '}
           <Link
-            href={`/auth/signup${callbackUrl ? `?eventsManagerCallbackUrl=${encodeURIComponent(callbackUrl)}` : ''}`}
+            href={`${PAGES.AUTH.SIGNUP}${callbackUrlWithPageUrl}`}
             className="text-blue-500 hover:underline"
           >
-            Registrate
+            {LOGIN_FORM.BUTTONS.REDIRECT_LINK}
           </Link>
         </p>
 
         <AuthButton
           Logo={Google}
-          method="google"
-          text="Continuar con Google"
+          method={LOGIN_FORM.METHODS.GOOGLE.NAME}
+          text={LOGIN_FORM.METHODS.GOOGLE.TEXT}
           callbackUrl={callbackUrl}
         />
 
@@ -70,7 +69,7 @@ export default function LoginForm() {
           disabled={loading}
           className="mt-2 flex items-center justify-center rounded-full px-4 py-2 font-semibold bg-[#242424] text-white border-white/15 border-2 self-center hover:bg-[#2f2f2f]"
         >
-          Entrar
+          {LOGIN_FORM.BUTTONS.SUBMIT}
         </button>
       </form>
     </AuthFormWrapper>

@@ -1,3 +1,4 @@
+import { ERRORS } from '@/constants/backend/errors'
 import { prisma } from '@/lib/prisma'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -17,14 +18,14 @@ export async function PATCH(
         description: body.description,
         price: body.price,
         date: new Date(body.date),
-        ...(body.images ? { images: { set: body.images } } : {}), // añade si tiene imágenes
+        ...(body.images ? { images: { set: body.images } } : {}),
       },
     })
 
     return NextResponse.json(updatedEvent)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.error('Error updating event:', error)
-    return new NextResponse('Error updating event', { status: 500 })
+    return new NextResponse(ERRORS.EVENT_BY_ID.UPDATING, { status: 500 })
   }
 }
 
@@ -41,9 +42,9 @@ export async function DELETE(
     })
 
     return NextResponse.json(deletedEvent)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.error('Error deleting event:', error)
-    return new NextResponse('Error deleting event', { status: 500 })
+    return new NextResponse(ERRORS.EVENT_BY_ID.DELETING, { status: 500 })
   }
 }
 
@@ -55,7 +56,10 @@ export async function GET(
   const eventId = Number(params.id)
 
   if (isNaN(eventId)) {
-    return NextResponse.json({ error: 'ID inválido' }, { status: 400 })
+    return NextResponse.json(
+      { error: ERRORS.EVENT_BY_ID.INVALID_ID },
+      { status: 400 }
+    )
   }
 
   try {
@@ -69,16 +73,16 @@ export async function GET(
 
     if (!event) {
       return NextResponse.json(
-        { error: 'Evento no encontrado' },
+        { error: ERRORS.EVENT_BY_ID.NOT_FOUND },
         { status: 404 }
       )
     }
 
     return NextResponse.json(event)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.error('Error al obtener el evento:', error)
     return NextResponse.json(
-      { error: 'Error interno del servidor' },
+      { error: ERRORS.EVENT_BY_ID.INTERNAL },
       { status: 500 }
     )
   }

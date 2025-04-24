@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { ERRORS } from '@/constants/frontend/errors'
 
 interface Props {
   onSuccess?: () => void
-  onError?: (error: unknown) => void
+  onError?: (error: string) => void
 }
 
 export default function useModalAction({ onSuccess, onError }: Props) {
@@ -26,14 +27,17 @@ export default function useModalAction({ onSuccess, onError }: Props) {
         body: body ? JSON.stringify(body) : undefined,
       })
 
-      if (!res.ok) throw new Error(`Error en la acción (${res.status})`)
-      await res.json()
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error)
 
       onSuccess?.()
       router.refresh()
-    } catch (error) {
-      console.error(error)
-      onError?.(error)
+    } catch (err) {
+      if (err instanceof Error) {
+        onError?.(err.message)
+      }else{
+        onError?.(ERRORS.SERVER_ERROR)
+      }
     } finally {
       setLoading(false)
     }

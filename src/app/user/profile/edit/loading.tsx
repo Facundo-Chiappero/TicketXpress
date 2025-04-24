@@ -1,3 +1,5 @@
+import UpdateProfileSkeleton from '@/app/ui/skeletons/UpdateProfileSkeleton'
+
 export default function Loading() {
-  return <div>Loading...</div>
+  return <UpdateProfileSkeleton />
 }

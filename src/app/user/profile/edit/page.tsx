@@ -1,58 +1,33 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import AuthFormWrapper from '@/app/ui/forms/AuthFormWrapper'
-import AuthInput from '@/app/ui/forms/AuthInput'
-import ProfilePicture from '@/components/User/ProfilePicture'
-import { getServerSession } from 'next-auth'
-import { redirect } from 'next/navigation'
+import UpdateUserForm from '@/app/ui/user/UpdateUserForm'
+import { UPDATE_PROFILE } from '@/constants/backend/updateProfile'
+import { PAGES } from '@/constants/frontend/pages'
+import confirmSession from '@/lib/session/confirmSession'
+import { hasPassword } from '@/lib/session/hasPassword'
+import Link from 'next/link'
 
 export default async function EditProfileForm() {
+  const session = await confirmSession({ callback: PAGES.USER.EDIT })
 
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    redirect('/auth/login?eventsManagerCallbackUrl=/user/profile')
-  }
-  
-  const user = session?.user
+  const userWithPassword = await hasPassword()
+  const user = session.user
 
   return (
-    <AuthFormWrapper title="Editar Perfil" loading={false}>
-      <form action="" className="flex flex-col gap-4 w-full">
-      <AuthInput
-          name="name"
-          type="name"
-          required
-          autoFocus
-          label="New Name"
-          autoComplete="name"
-          defaultValue={user.name}
-        />
-        <AuthInput
-          name="email"
-          type="email"
-          required
-          autoFocus
-          label="New Email"
-          autoComplete="email"
-          defaultValue={user.email}
-        />
-        <AuthInput
-          name="password"
-          type="password"
-          required
-          label="New Password"
-          autoComplete="current-password"
-        />
-
-        <ProfilePicture userImage={user.image}/>
-
-        <button
-          type="submit"
-          disabled={false}
-          className="mt-2 flex items-center justify-center rounded-full px-4 py-2 font-semibold bg-[#242424] text-white border-white/15 border-2 self-center hover:bg-[#2f2f2f]"
-        >
-          Actualizar
-        </button>
-      </form>
-    </AuthFormWrapper>
+    <>
+      {userWithPassword ? (
+        <UpdateUserForm user={user} />
+      ) : (
+        <main className="w-full min-h-[60vh] justify-center items-center flex-col flex">
+          <h3 className="text-xl font-semibold mb-4 text-center max-w-[500px]">
+            {UPDATE_PROFILE.NO_PASSWORD.TITLE}
+          </h3>
+          <Link
+            href={PAGES.USER.PROFILE}
+            className="flex items-center justify-center rounded-full px-3 py-1 font-semibold w-fit bg-gray-50 text-gray-900 border-white/15 border-2 self-center hover:bg-gray-200"
+          >
+            {UPDATE_PROFILE.NO_PASSWORD.BUTTON}
+          </Link>
+        </main>
+      )}
+    </>
   )
 }

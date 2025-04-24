@@ -3,7 +3,8 @@
 import { Suspense, useState } from 'react'
 import { Spinner } from '../icons/Spinner'
 import dynamic from 'next/dynamic'
-import { CurrentUser } from '@/../../types.d'
+import { CurrentUser, ROLES } from '@/types'
+import { CREATE_EVENT_MODAL } from '@/constants/frontend/modals'
 
 // Lazy import con suspense
 const CreateEventModal = dynamic(
@@ -23,12 +24,14 @@ export default function CreateEventButton({ user }: { user: CurrentUser }) {
 
   return (
     <>
-      {user?.role === 'ADMIN' && (
+      {user?.role === ROLES.ADMIN && (
         <button
           className="bg-green-600 hover:bg-green-500 h-fit rounded-full flex items-center justify-center px-3 py-1 font-semibold w-fit text-white border-white/15 border-2 self-center whitespace-nowrap"
           onClick={() => setShowModal(true)}
+          aria-label={CREATE_EVENT_MODAL.TITLE}
+          title={CREATE_EVENT_MODAL.TITLE}
         >
-          Create Event
+          {CREATE_EVENT_MODAL.TITLE}
         </button>
       )}
 

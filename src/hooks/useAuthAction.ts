@@ -3,6 +3,10 @@
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
+import { PARAMS } from '@/constants/frontend/params'
+import { PAGES } from '@/constants/frontend/pages'
+import { ERRORS } from '@/constants/frontend/errors'
+import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 
 export default function useAuthAction(isSignUp: boolean = false) {
   const [loading, setLoading] = useState(false)
@@ -10,12 +14,13 @@ export default function useAuthAction(isSignUp: boolean = false) {
   const [success, setSuccess] = useState<string | null>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('eventsManagerCallbackUrl') || '/'
+  const callbackUrl = searchParams.get(PARAMS.AUTH_CALLBACK) || PAGES.HOME
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
+    setSuccess(null)
 
     const formData = new FormData(e.currentTarget)
 
@@ -26,14 +31,13 @@ export default function useAuthAction(isSignUp: boolean = false) {
 
     try {
       if (isSignUp) {
-        // Aquí es donde el campo `name` es necesario
         if (!name || !email || !password) {
-          setError('Todos los campos son obligatorios')
+          setError(ERRORS.SIGN_UP_FORM.REQUIRED_FIELDS)
           return
         }
 
-        const res = await fetch('/api/auth/signup', {
-          method: 'POST',
+        const res = await fetch(API_ENDPOINTS.SIGNUP, {
+          method: HTTP_METHODS.POST,  
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, email, password }),
         })
@@ -41,8 +45,7 @@ export default function useAuthAction(isSignUp: boolean = false) {
         const data = await res.json()
 
         if (!res.ok) {
-          setError(data.error || 'Error al crear cuenta')
-          return
+          throw new Error (data.error ?? ERRORS.SIGN_UP_FORM.GENERAL)
         }
       }
 
@@ -56,21 +59,24 @@ export default function useAuthAction(isSignUp: boolean = false) {
       if (result?.error) {
         setError(
           isSignUp
-            ? 'Cuenta creada, pero no se pudo iniciar sesión automáticamente.\nPara ser redireccionado automaticamente <a href="/" class="text-blue-600 underline">haz click aqui</a>'
-            : 'Credenciales incorrectas. Intenta de nuevo.'
+            ? ERRORS.SIGN_UP_FORM.LOGIN_FAILED_AFTER_SIGNUP
+            : ERRORS.LOGIN_FORM.CREDENTIALS_ERROR
         )
       } else {
         setSuccess(
           isSignUp
-            ? 'Cuenta creada, pronto si no eres redireccionado <a href="/" class="text-blue-600 underline">haz click aqui</a>'
-            : 'Logeo exitoso si no eres redireccionado automaticamente <a href="/" class="text-blue-600 underline">haz click aqui</a>'
+            ? ERRORS.SIGN_UP_FORM.REDIRECT_SUCCESS
+            : ERRORS.LOGIN_FORM.REDIRECT_SUCCESS
         )
         router.push(callbackUrl)
         router.refresh()
       }
     } catch (err) {
-      console.error(err)
-      setError('Hubo un error en el servidor.')
+      if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError(ERRORS.UPDATE_USER.UNKNOWN_ERROR)
+      }
     } finally {
       setLoading(false)
     }

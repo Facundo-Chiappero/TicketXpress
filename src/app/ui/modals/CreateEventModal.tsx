@@ -5,7 +5,8 @@ import { Spinner } from '../icons/Spinner'
 import EventFormFields from '../forms/EventFormFields'
 import useEscapeKey from '@/hooks/useEscapeKey'
 import useModalAction from '@/hooks/useModalAction'
-import { CREATE_EVENT_MODAL, ENDPOINTS } from '@/constants/frontend'
+import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
+import { CREATE_EVENT_MODAL } from '@/constants/frontend/modals'
 
 interface Props {
   userId: string
@@ -13,12 +14,13 @@ interface Props {
 }
 
 export default function CreateEventModal({ userId, onClose }: Props) {
+  const [error, setError] = useState<string | null>(null)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState(0)
   const [date, setDate] = useState('')
   const [images, setImages] = useState<string[]>([])
-  const { execute, loading } = useModalAction({ onSuccess: onClose })
+  const { execute, loading } = useModalAction({ onSuccess: onClose, onError: setError })
 
   useEscapeKey(onClose)
 
@@ -34,15 +36,15 @@ export default function CreateEventModal({ userId, onClose }: Props) {
       creatorId: userId,
     }
 
-    execute(ENDPOINTS.EVENTS, { method: ENDPOINTS.METHODS.POST }, payload)
+    execute(API_ENDPOINTS.EVENTS, { method:   HTTP_METHODS.POST }, payload)
   }
 
   return (
     <div
       className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
       role="dialog"
-      aria-labelledby="create-event-title"
-      aria-describedby="create-event-description"
+      aria-labelledby={CREATE_EVENT_MODAL.ARIA_LABELLED_BY}
+      aria-describedby={CREATE_EVENT_MODAL.ARIA_DESCRIBED_BY}
     >
       <form
         onSubmit={handleSubmit}
@@ -69,7 +71,8 @@ export default function CreateEventModal({ userId, onClose }: Props) {
             images={images}
             setImages={setImages}
             onClose={onClose}
-            submitLabel="Crear"
+            submitLabel={CREATE_EVENT_MODAL.SUBMIT_LABEL}
+            error={error}
           />
         )}
       </form>

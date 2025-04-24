@@ -1,4 +1,5 @@
+import ProfileSkeleton from '@/app/ui/skeletons/ProfileSkeleton'
+
 export default function Loading() {
-  //todo add skeleton
-  return <div>loading...</div>
+  return <ProfileSkeleton />
 }

@@ -1,4 +1,6 @@
-export default function AuthSkeleton() {
+import InputSkeleton from "./InputSkeleton";
+
+export default function AuthSkeleton({amount}: {amount: number}) {
   return (
     <>
       <header
@@ -9,20 +11,20 @@ export default function AuthSkeleton() {
         <div className="h-8 w-1/12 bg-zinc-300 dark:bg-zinc-700 rounded" />
       </header>
       <main className="w-full min-h-screen flex items-center justify-center">
-        <div
-          className="bg-gray-100 dark:bg-zinc-800 animate-pulse flex flex-col gap-4 p-6 rounded-lg w-[320px]"
-          aria-busy="true"
-        >
-          <div className="h-6 bg-gray-300 dark:bg-zinc-700 rounded w-3/4" />
-          <div className="h-10 bg-gray-300 dark:bg-zinc-700 rounded w-full" />
+            <div className="dark:bg-gray-50 text-black flex flex-col gap-4 mx-4 p-6 rounded-lg min-w-[300px] max-w-[400px] w-full shadow-md bg-gray-200 animate-pulse">
+              {/* Título */}
+              <div className="h-6 bg-zinc-300 rounded w-1/2 mx-auto mb-2" />
+      
+              {/* Inputs */}
+              <InputSkeleton amount={amount}/>
+      
+              <div className="h-4 bg-zinc-400 rounded w-1/3 self-center" />
 
-          <div className="h-6 bg-gray-300 dark:bg-zinc-700 rounded w-3/4" />
-          <div className="h-10 bg-gray-300 dark:bg-zinc-700 rounded w-full" />
-
-          <div className="h-4 bg-gray-200 dark:bg-zinc-600 rounded w-1/2 self-center mt-2" />
-          <div className="h-10 bg-gray-400 dark:bg-zinc-600 rounded w-1/2 self-center mt-2" />
-        </div>
-      </main>
+              {/* Botón */}
+              <div className="h-10 w-32 bg-zinc-300 rounded mx-auto mt-2 mb-0" />
+              <div className="h-10 w-20 bg-zinc-400 dark:bg-zinc-600 rounded-full mx-auto " />
+            </div>
+          </main>
     </>
   )
 }

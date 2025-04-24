@@ -34,6 +34,47 @@ body {
   }
 }
 
+@layer components {
+  .triangle-with-border {
+    position: relative;
+  }
+
+  .triangle-with-border::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 24px solid rgb(63 63 70); /* border */
+  }
+
+  .triangle-with-border::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 2px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid rgb(39 39 42); /* triangle */
+  }
+}
+
+
+
+p {
+  @apply text-pretty;
+}
+
+.pfp {
+  @apply min-w-10 w-10 h-10 rounded-full object-cover border-2;
+}
+
 /* mecado pago button */
 div .svelte-1swmi9x {
   margin: 1rem 0 0 0 !important;

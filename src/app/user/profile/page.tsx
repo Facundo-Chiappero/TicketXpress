@@ -1,16 +1,11 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import UserCard from '@/app/ui/user/UserCard'
 import UserEvents from '@/app/ui/user/UserEvents'
+import confirmSession from '@/lib/session/confirmSession'
 import { prisma } from '@/lib/prisma'
-import { getServerSession } from 'next-auth'
-import { redirect } from 'next/navigation'
+import { PAGES } from '@/constants/frontend/pages'
 
 export default async function UserProfilePage() {
-  //todo pasar esto a un util
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    redirect('/auth/login?eventsManagerCallbackUrl=/user/profile')
-  }
+  const session = await confirmSession({ callback: PAGES.USER.PROFILE })
 
   const user = session?.user
 
@@ -29,9 +24,11 @@ export default async function UserProfilePage() {
   const amountFutureEvents = futureEvents.length
 
   return (
-    <main className="px-4">
-      <UserCard user={user} amountFutureEvents={amountFutureEvents} />
-      <UserEvents user={user} futureEvents={futureEvents} />
-    </main>
+    <>
+      <main className="px-4">
+        <UserCard user={user} amountFutureEvents={amountFutureEvents} />
+        <UserEvents user={user} futureEvents={futureEvents} />
+      </main>
+    </>
   )
 }

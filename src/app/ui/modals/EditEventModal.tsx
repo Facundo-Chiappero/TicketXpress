@@ -5,7 +5,8 @@ import { Spinner } from '../icons/Spinner'
 import EventFormFields from '../forms/EventFormFields'
 import useEscapeKey from '@/hooks/useEscapeKey'
 import useModalAction from '@/hooks/useModalAction'
-import { ENDPOINTS, UPDATE_EVENT_MODAL } from '@/constants/frontend'
+import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
+import { UPDATE_EVENT_MODAL } from '@/constants/frontend/modals'
 
 interface Props {
   event: {
@@ -20,12 +21,13 @@ interface Props {
 }
 
 export default function EditEventModal({ event, onClose }: Props) {
+  const [error, setError] = useState<string | null>(null)
   const [title, setTitle] = useState(event.title)
   const [description, setDescription] = useState(event.description)
   const [images, setImages] = useState<string[]>(event.images || [])
   const [price, setPrice] = useState(event.price)
   const [date, setDate] = useState(event.date.toISOString().slice(0, 16))
-  const { execute, loading } = useModalAction({ onSuccess: onClose })
+  const { execute, loading } = useModalAction({ onSuccess: onClose, onError: setError })
 
   useEscapeKey(onClose)
 
@@ -41,8 +43,8 @@ export default function EditEventModal({ event, onClose }: Props) {
     }
 
     execute(
-      `${ENDPOINTS.EVENTS}/${event.id}`,
-      { method: ENDPOINTS.METHODS.PATCH },
+      `${API_ENDPOINTS.EVENTS}/${event.id}`,
+      { method: HTTP_METHODS.PATCH },
       payload
     )
   }
@@ -50,20 +52,34 @@ export default function EditEventModal({ event, onClose }: Props) {
   return (
     <div
       className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
-      role="dialog"
-      aria-labelledby="edit-event-title"
-      aria-describedby="edit-event-description"
+      role={UPDATE_EVENT_MODAL.ARIA.ROLE}
+      aria-modal="true"
+      aria-labelledby={UPDATE_EVENT_MODAL.ARIA.LABELLED_BY}
+      aria-describedby={UPDATE_EVENT_MODAL.ARIA.DESCRIBED_BY}
     >
       <form
         onSubmit={handleSubmit}
         className="bg-white dark:bg-zinc-900 p-6 rounded-lg shadow-md w-[90%] max-w-lg space-y-4"
       >
-        <h2 id="edit-event-title" className="text-xl font-bold">
+        <h2
+          id={UPDATE_EVENT_MODAL.ARIA.LABELLED_BY}
+          className="text-xl font-bold"
+        >
           {UPDATE_EVENT_MODAL.TITLE}
         </h2>
 
+        {/* Description (visually hidden or visible as needed) */}
+        <p id={UPDATE_EVENT_MODAL.ARIA.DESCRIBED_BY} className="sr-only">
+          {/* You can update this in constants if needed */}
+          Edit the information of your event using the form below.
+        </p>
+
         {loading ? (
-          <div className="flex justify-center items-center h-40">
+          <div
+            className="flex justify-center items-center h-40"
+            role="status"
+            aria-busy="true"
+          >
             <Spinner />
           </div>
         ) : (
@@ -79,7 +95,8 @@ export default function EditEventModal({ event, onClose }: Props) {
             images={images}
             setImages={setImages}
             onClose={onClose}
-            submitLabel="Guardar"
+            submitLabel={UPDATE_EVENT_MODAL.SUBMIT_LABEL}
+            error={error}
           />
         )}
       </form>

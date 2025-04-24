@@ -1,5 +1,6 @@
-import EventCard from '@/components/Events/EventCard'
-import { Event, User } from '../../../../types.d'
+import EventCard from '@/app/ui/Events/EventCard'
+import { USER_EVENTS } from '@/constants/frontend/userEvents'
+import { Event, User } from '@/types'
 
 interface Props {
   user: User
@@ -9,7 +10,7 @@ interface Props {
 export default function UserEvents({ user, futureEvents }: Props) {
   return (
     <section className="flex flex-col mt-4 justify-center items-center">
-      <h2 className="w-[80%] text-4xl font-bold mb-2">Future Events</h2>
+      <h2 className="w-[80%] text-4xl font-bold mb-2">{USER_EVENTS.TITLE}</h2>
       {futureEvents.length > 0 ? (
         futureEvents.map((e) => {
           if (!e) return
@@ -22,10 +23,7 @@ export default function UserEvents({ user, futureEvents }: Props) {
           )
         })
       ) : (
-        <p>
-          You don&apos;t have any event in the future... we recommend you buying
-          some
-        </p>
+        <p>{USER_EVENTS.NO_EVENTS}</p>
       )}
     </section>
   )

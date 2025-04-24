@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { MercadoPagoConfig, Preference } from 'mercadopago'
-import { PAYMENT_MESSAGES, PAYMENT_ERRORS, PAYMENT } from '@/constants/backend'
+import { ERRORS } from '@/constants/backend/errors'
+import { PAYMENT_MESSAGES } from '@/constants/backend/paymentMessages'
+import { PAYMENT } from '@/constants/backend/payment'
 
 const client = new MercadoPagoConfig({
   accessToken: process.env.NEXT_PUBLIC_MP_ACCESS_TOKEN || '',
@@ -11,7 +13,7 @@ export async function POST(req: Request) {
     const { id, title, unit_price, userId, eventId } = await req.json()
 
     if (!title || !unit_price || !userId) {
-      console.warn(PAYMENT_ERRORS.MISSING)
+      console.warn(ERRORS.PAYMENT.MISSING)
       return NextResponse.json(
         { message: PAYMENT_MESSAGES.MISSING_DATA },
         { status: 400 }
@@ -50,7 +52,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ id: result.id })
   } catch (error) {
-    console.error(PAYMENT_ERRORS.CREATE, error)
+    console.error(ERRORS.PAYMENT.CREATE, error)
     return NextResponse.json(
       { message: PAYMENT_MESSAGES.CREATE_ERROR },
       { status: 500 }
