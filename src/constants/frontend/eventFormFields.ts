@@ -8,4 +8,4 @@ export const EVENT_FORM_FIELDS = {
     CANCEL: 'Cancel',
     SAVE: 'Save',
   },
-};
+}

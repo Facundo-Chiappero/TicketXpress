@@ -4,15 +4,18 @@ import { ToastContainer } from 'react-toastify'
 
 export default async function LoginPage() {
   return (
-
-<>
-      <header className="absolute top-4 left-4">
+    <>
+      <header className="m-4">
         <GoHomeButton />
       </header>
       <LoginForm />
 
-      <ToastContainer position='bottom-right' closeOnClick={true} newestOnTop={true}  theme='colored' />
-
+      <ToastContainer
+        position="bottom-right"
+        closeOnClick={true}
+        newestOnTop={true}
+        theme="colored"
+      />
     </>
   )
 }

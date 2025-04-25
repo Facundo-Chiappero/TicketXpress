@@ -10,4 +10,4 @@ export const UPDATE_PROFILE = {
       'You need a password to update your profile, go to Create Password section from your profile',
     BUTTON: 'Go Back',
   },
-};
+}

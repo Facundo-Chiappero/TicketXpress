@@ -1,4 +1,4 @@
-import { API_ENDPOINTS, HTTP_METHODS } from "@/constants/frontend/endpoints"
+import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 
 export async function verifyCaptchaClient(token: string): Promise<boolean> {
   try {
@@ -9,7 +9,7 @@ export async function verifyCaptchaClient(token: string): Promise<boolean> {
     })
     const data = await res.json()
     return data.success
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     return false
   }

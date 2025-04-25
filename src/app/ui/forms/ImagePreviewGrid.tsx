@@ -1,7 +1,6 @@
 'use client'
 
-import { IMAGE_PREVIEW_GRID } from "@/constants/frontend/imagePreviewGrid"
-
+import { IMAGE_PREVIEW_GRID } from '@/constants/frontend/imagePreviewGrid'
 
 interface Props {
   images: string[]

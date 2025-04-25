@@ -13,15 +13,15 @@ import { useUIStore } from '@/stores/useUIStore'
 
 export default function UpdateUserForm({ user }: { user: User }) {
   const { handleSubmit } = useUpdateUser()
-const {
-  loading,
-  error,
-  updated,
-  newPasswordVisible,
-  currentPasswordVisible,
-  toggleNewPasswordVisible,
-  toggleCurrentPasswordVisible
-} = useUIStore();
+  const {
+    loading,
+    error,
+    updated,
+    newPasswordVisible,
+    currentPasswordVisible,
+    toggleNewPasswordVisible,
+    toggleCurrentPasswordVisible,
+  } = useUIStore()
   return (
     <>
       <AuthFormWrapper title={UPDATE_USER_FORM.TITLE} loading={loading}>
@@ -54,14 +54,25 @@ const {
             placeholder={UPDATE_USER_FORM.PLACEHOLDERS.EMAIL}
           />
 
-          <PasswordInput label={UPDATE_USER_FORM.LABELS.CURRENT_PASSWORD} placeholder={UPDATE_USER_FORM.PLACEHOLDERS.CURRENT_PASSWORD} passwordVisible={currentPasswordVisible} updateVisibility={toggleNewPasswordVisible} aria_label={UPDATE_USER_FORM.LABELS.CURRENT_PASSWORD} />
+          <PasswordInput
+            label={UPDATE_USER_FORM.LABELS.CURRENT_PASSWORD}
+            placeholder={UPDATE_USER_FORM.PLACEHOLDERS.CURRENT_PASSWORD}
+            passwordVisible={currentPasswordVisible}
+            updateVisibility={toggleNewPasswordVisible}
+            aria_label={UPDATE_USER_FORM.LABELS.CURRENT_PASSWORD}
+          />
 
-          <PasswordInput label={UPDATE_USER_FORM.LABELS.NEW_PASSWORD} placeholder={UPDATE_USER_FORM.PLACEHOLDERS.NEW_PASSWORD} passwordVisible={newPasswordVisible} updateVisibility={toggleCurrentPasswordVisible} aria_label={UPDATE_USER_FORM.LABELS.NEW_PASSWORD} />
+          <PasswordInput
+            label={UPDATE_USER_FORM.LABELS.NEW_PASSWORD}
+            placeholder={UPDATE_USER_FORM.PLACEHOLDERS.NEW_PASSWORD}
+            passwordVisible={newPasswordVisible}
+            updateVisibility={toggleCurrentPasswordVisible}
+            aria_label={UPDATE_USER_FORM.LABELS.NEW_PASSWORD}
+          />
 
           <ProfilePicture userImage={user.image} userName={user.name} />
 
-          {error && <ErrorMessage error={error}/>}
-          
+          {error && <ErrorMessage error={error} />}
 
           <button
             type="submit"

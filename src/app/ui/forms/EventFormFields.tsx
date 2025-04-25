@@ -37,7 +37,7 @@ export default function EventFormFields({
   onClose,
   submitLabel = EVENT_FORM_FIELDS.BUTTONS.SAVE,
 }: Props) {
-  const {error, setError} = useUIStore()
+  const { error, setError } = useUIStore()
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || [])
@@ -49,7 +49,7 @@ export default function EventFormFields({
         formData.append('file', file)
 
         const res = await fetch(API_ENDPOINTS.UPLOAD_IMAGE, {
-          method:  HTTP_METHODS.POST,
+          method: HTTP_METHODS.POST,
           body: formData,
         })
 
@@ -64,9 +64,9 @@ export default function EventFormFields({
       const uploadedUrls = await Promise.all(uploadPromises)
       setImages([...images, ...uploadedUrls])
     } catch (err) {
-      if(err instanceof Error){
+      if (err instanceof Error) {
         setError(err.message)
-      }else{
+      } else {
         setError(ERRORS.PROFILE_PICTURE.GENERIC_UPLOAD_ERROR)
       }
     }
@@ -118,8 +118,7 @@ export default function EventFormFields({
         onRemove={(i) => setImages(images.filter((_, idx) => idx !== i))}
       />
 
-              {error && <ErrorMessage error={error}/>}
-      
+      {error && <ErrorMessage error={error} />}
 
       <div className="flex justify-end gap-2">
         <button

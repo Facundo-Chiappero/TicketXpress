@@ -1,4 +1,4 @@
-import InputSkeleton from "./InputSkeleton";
+import InputSkeleton from './InputSkeleton'
 
 export default function CreatePasswordSkeleton() {
   return (

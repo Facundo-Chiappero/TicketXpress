@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
     })
 
     return NextResponse.json({ message: SIGNUP.SUCCESS }, { status: 201 })
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return NextResponse.json(
       { error: ERRORS.SIGNUP.CREATING_USER },

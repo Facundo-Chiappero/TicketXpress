@@ -16,21 +16,29 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { PROVIDERS } from '@/constants/backend/providers'
 import { useUIStore } from '@/stores/useUIStore'
 
-
 export default function SignUpForm() {
-  const { handleSubmit, callbackUrl } =
-    useAuthAction(true)
+  const { handleSubmit, callbackUrl } = useAuthAction(true)
   //used in Link tag
   const callbackUrlWithPageUrl = callbackUrl
     ? `?${PARAMS.AUTH_CALLBACK}=${encodeURIComponent(callbackUrl)}`
     : ''
-    
-            const {recaptchaToken, setRecaptchaToken, passwordVisible, togglePasswordVisible, loading, error, success } = useUIStore()
-        
+
+  const {
+    recaptchaToken,
+    setRecaptchaToken,
+    passwordVisible,
+    togglePasswordVisible,
+    loading,
+    error,
+    success,
+  } = useUIStore()
 
   return (
     <AuthFormWrapper title={SIGN_UP_FORM.TITLE} loading={loading}>
-      <form onSubmit={(e) => handleSubmit(e, recaptchaToken)} className="flex flex-col gap-4 w-full">
+      <form
+        onSubmit={(e) => handleSubmit(e, recaptchaToken)}
+        className="flex flex-col gap-4 w-full"
+      >
         <AuthInput
           name="name"
           type="text"
@@ -49,11 +57,16 @@ export default function SignUpForm() {
           autoComplete="email"
           placeholder={SIGN_UP_FORM.PLACEHOLDERS.EMAIL}
         />
-                <PasswordInput label={SIGN_UP_FORM.LABELS.PASSWORD} name={PROVIDERS.CREDENTIAL_KEYS.PASSWORD} updateVisibility={togglePasswordVisible} passwordVisible={passwordVisible} placeholder={SIGN_UP_FORM.PLACEHOLDERS.PASSWORD} />
-        
+        <PasswordInput
+          label={SIGN_UP_FORM.LABELS.PASSWORD}
+          name={PROVIDERS.CREDENTIAL_KEYS.PASSWORD}
+          updateVisibility={togglePasswordVisible}
+          passwordVisible={passwordVisible}
+          placeholder={SIGN_UP_FORM.PLACEHOLDERS.PASSWORD}
+        />
 
-                {error && <ErrorMessage error={error}/>}
-        
+        {error && <ErrorMessage error={error} />}
+
         {success && (
           <>
             <p className="text-green-700 text-sm">{success}</p>
@@ -71,10 +84,12 @@ export default function SignUpForm() {
           </Link>
         </p>
 
-        <ReCAPTCHA
-  sitekey={process.env.NEXT_PUBLIC_GOOGLE_SITE_KEY!}
-  onChange={(token) => setRecaptchaToken(token)}
-/>
+        <div className="scale-[.85] sm:scale-100 origin-top-left">
+          <ReCAPTCHA
+            sitekey={process.env.NEXT_PUBLIC_GOOGLE_SITE_KEY!}
+            onChange={(token) => setRecaptchaToken(token)}
+          />
+        </div>
 
         <AuthButton
           Logo={Google}

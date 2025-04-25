@@ -24,4 +24,4 @@ export const METADATA = {
       DESCRIPTION: 'Authentication page with credentials or Google login',
     },
   },
-};
+}

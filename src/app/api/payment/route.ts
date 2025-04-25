@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     })
 
     return NextResponse.json({ id: result.id })
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return NextResponse.json(
       { message: PAYMENT_MESSAGES.CREATE_ERROR },

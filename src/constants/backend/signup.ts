@@ -13,5 +13,4 @@ export const SIGNUP = {
     CREATING_USER: 'Error creating user',
   },
   SUCCESS: 'User created successfully',
-  
-};
+}

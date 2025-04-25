@@ -4,4 +4,4 @@ export const PAYMENT_MESSAGES = {
   WEBHOOK_SAVE_SUCCESS: 'Payment saved to database',
   WEBHOOK_NO_METADATA: 'Metadata not found',
   WEBHOOK_ERROR: 'Error in webhook',
-};
+}

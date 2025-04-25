@@ -29,8 +29,7 @@ const DeleteEventModal = dynamic(
 )
 
 export default function EditEventActions({ event }: { event: Event }) {
-    const { isDeleting, isEditing, setIsDeleting, setIsEditing} = useUIStore()
-  
+  const { isDeleting, isEditing, setIsDeleting, setIsEditing } = useUIStore()
 
   return (
     <>

@@ -14,4 +14,4 @@ export const PAYMENT = {
   },
   WEBHOOK_LISTENED: 'Webhook listened',
   WEBHOOK_IGNORED: 'Webhook ignored',
-};
+}

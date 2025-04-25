@@ -12,4 +12,4 @@ export const PAGES = {
   EVENTS: {
     BUY: (id: string | number) => `/events/buy/${id}`,
   },
-};
+}

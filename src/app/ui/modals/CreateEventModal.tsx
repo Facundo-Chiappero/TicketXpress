@@ -26,10 +26,9 @@ export default function CreateEventModal({ userId, onClose }: Props) {
     setImages,
     setPrice,
     setDate,
-  } = useEventFormStore();
+  } = useEventFormStore()
   const { execute } = useModalAction({ onSuccess: onClose })
-    const {loading} = useUIStore()
-  
+  const { loading } = useUIStore()
 
   useEscapeKey(onClose)
 
@@ -45,7 +44,7 @@ export default function CreateEventModal({ userId, onClose }: Props) {
       creatorId: userId,
     }
 
-    execute(API_ENDPOINTS.EVENTS, { method:   HTTP_METHODS.POST }, payload)
+    execute(API_ENDPOINTS.EVENTS, { method: HTTP_METHODS.POST }, payload)
   }
 
   return (

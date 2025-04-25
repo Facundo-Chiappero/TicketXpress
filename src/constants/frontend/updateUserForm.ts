@@ -28,4 +28,4 @@ export const UPDATE_USER_FORM = {
     NEW_PASSWORD: 'S4fe_PasSw0rd',
     IMAGE: 'Profile Picture',
   },
-};
+}

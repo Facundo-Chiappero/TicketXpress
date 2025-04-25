@@ -1,4 +1,4 @@
-import InputSkeleton from "./InputSkeleton";
+import InputSkeleton from './InputSkeleton'
 
 export default function UpdateProfileSkeleton() {
   return (
@@ -8,7 +8,7 @@ export default function UpdateProfileSkeleton() {
         <div className="h-6 bg-zinc-300 rounded w-1/2 mx-auto mb-2" />
 
         {/* Inputs */}
-        <InputSkeleton amount={4}/>
+        <InputSkeleton amount={4} />
 
         {/* Imagen */}
         <div className="flex flex-col gap-2 mt-4">

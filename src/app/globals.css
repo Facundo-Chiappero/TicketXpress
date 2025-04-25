@@ -26,6 +26,10 @@
 body {
   color: var(--foreground);
   background: var(--background);
+  overflow-wrap: anywhere;
+}
+button, a{
+  overflow-wrap: normal;
 }
 
 @layer utilities {
@@ -40,19 +44,19 @@ body {
   }
 
   .triangle-with-border::before {
-    content: "";
+    content: '';
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-bottom: 24px solid rgb(63 63 70); /* border */
+    border-left: 17px solid transparent;
+    border-right: 17px solid transparent;
+    border-bottom: 34px solid rgb(63 63 70); /* border */
   }
 
   .triangle-with-border::after {
-    content: "";
+    content: '';
     position: absolute;
     left: 50%;
     top: 2px;
@@ -64,8 +68,6 @@ body {
     border-bottom: 20px solid rgb(39 39 42); /* triangle */
   }
 }
-
-
 
 p {
   @apply text-pretty;

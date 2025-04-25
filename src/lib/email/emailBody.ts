@@ -1,4 +1,4 @@
-export function emailBody({amount, name}: {amount: number, name: string}) {
+export function emailBody({ amount, name }: { amount: number; name: string }) {
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background-color: #f9f9f9; border-radius: 8px;">
       <h2 style="color: #2c3e50;">Thank you for your purchase! 🎉</h2>

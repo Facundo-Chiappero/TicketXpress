@@ -5,7 +5,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 export default function AuthInput({ label, name, ...props }: Props) {
   return (
     <>
-    {/* row and col classes are useful for password type inputs, to display the eye button */}
+      {/* row and col classes are useful for password type inputs, to display the eye button */}
       <label htmlFor={name} className="text-sm font-medium -mb-2.5">
         {label}
       </label>

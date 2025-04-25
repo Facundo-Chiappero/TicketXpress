@@ -9,10 +9,13 @@ export async function getAllEvents() {
 }
 
 export async function getEventById(id: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}${API_ENDPOINTS.EVENTS}/${id}`, {
-    cache: 'no-store',
-    method: HTTP_METHODS.GET
-  })
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}${API_ENDPOINTS.EVENTS}/${id}`,
+    {
+      cache: 'no-store',
+      method: HTTP_METHODS.GET,
+    }
+  )
 
   if (!res.ok) return null
   return res.json()

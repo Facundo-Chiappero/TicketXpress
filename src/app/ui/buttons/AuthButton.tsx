@@ -1,5 +1,6 @@
 'use client'
 
+import { AUTH_BUTTON } from '@/constants/frontend/authButton'
 import { signIn } from 'next-auth/react'
 
 interface Props {
@@ -11,7 +12,13 @@ interface Props {
 }
 
 // auth button with different methods
-export default function AuthButton({ Logo, method, text, callbackUrl, classes }: Props) {
+export default function AuthButton({
+  Logo,
+  method,
+  text,
+  callbackUrl,
+  classes,
+}: Props) {
   return (
     <button
       type="button"
@@ -22,7 +29,8 @@ export default function AuthButton({ Logo, method, text, callbackUrl, classes }:
       aria-label={text}
     >
       <span>{<Logo />}</span>
-      {text}
+      <span className='hidden xs:inline'>{text}</span>
+      <span className='inline xs:hidden'>{AUTH_BUTTON.ALTERNATIVE_TEXT}</span>
     </button>
   )
 }

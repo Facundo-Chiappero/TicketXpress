@@ -13,4 +13,4 @@ export const PROFILE_PICTURE = {
     UPLOAD_FAILED: 'Upload failed',
     GENERIC_UPLOAD_ERROR: 'Error uploading image:',
   },
-};
+}

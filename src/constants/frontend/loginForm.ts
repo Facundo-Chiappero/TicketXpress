@@ -26,4 +26,4 @@ export const LOGIN_FORM = {
     CREDENTIALS_ERROR: 'Incorrect credentials. Please try again.',
     REDIRECT_SUCCESS: 'Login successful. Redirecting shortly...',
   },
-};
+}

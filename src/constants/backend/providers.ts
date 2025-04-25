@@ -21,5 +21,5 @@ export const PROVIDERS = {
   CREDENTIAL_KEYS: {
     EMAIL: 'email',
     PASSWORD: 'password',
-  }
-};
+  },
+}

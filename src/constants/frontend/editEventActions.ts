@@ -14,4 +14,4 @@ export const EDIT_EVENT_ACTIONS = {
     DELETE_EVENT_TITLE: 'delete-event-title',
     DELETE_EVENT_DESCRIPTION: 'delete-event-description',
   },
-};
+}

@@ -11,7 +11,7 @@ import { PROVIDERS } from '@/constants/backend/providers'
 import { useUIStore } from '@/stores/useUIStore'
 
 export default function useAuthAction(isSignUp: boolean = false) {
-  const {setLoading, setError, setSuccess} = useUIStore()
+  const { setLoading, setError, setSuccess } = useUIStore()
   const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get(PARAMS.AUTH_CALLBACK) || PAGES.HOME
@@ -34,13 +34,11 @@ export default function useAuthAction(isSignUp: boolean = false) {
     const password = (formData.get('password') as string).trim()
 
     try {
-      
       if (!recaptchaToken) throw new Error(ERRORS.INVALID_CAPTCHA)
       const isCaptchaValid = await verifyCaptchaClient(recaptchaToken)
 
       if (!isCaptchaValid) throw new Error(ERRORS.INVALID_CAPTCHA)
 
-      
       if (isSignUp) {
         if (!name || !email || !password) {
           setError(ERRORS.SIGN_UP_FORM.REQUIRED_FIELDS)

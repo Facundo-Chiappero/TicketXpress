@@ -21,7 +21,7 @@ const CreateEventModal = dynamic(
 )
 
 export default function CreateEventButton({ user }: { user: CurrentUser }) {
-  const { showModal, setShowModal} = useUIStore()
+  const { showModal, setShowModal } = useUIStore()
   return (
     <>
       {user?.role === ROLES.ADMIN && (

@@ -4,4 +4,4 @@ export const CREATE_PASSWORD = {
     SERVER_ERROR: 'Something went wrong',
   },
   SUCCESS: 'The password was updated successfully',
-};
+}

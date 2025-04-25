@@ -3,7 +3,7 @@ export const CREATE_EVENT_MODAL = {
   SUBMIT_LABEL: 'Create',
   ARIA_LABELLED_BY: 'create-event-title',
   ARIA_DESCRIBED_BY: 'Use this form to edit your event information',
-};
+}
 
 export const UPDATE_EVENT_MODAL = {
   TITLE: 'Edit Event',
@@ -13,7 +13,7 @@ export const UPDATE_EVENT_MODAL = {
     LABELLED_BY: 'edit-event-title',
     DESCRIBED_BY: 'Use this form to create an event',
   },
-};
+}
 
 export const DELETE_EVENT_MODAL = {
   TITLE: 'Delete Event?',
@@ -28,4 +28,4 @@ export const DELETE_EVENT_MODAL = {
     CANCEL_LABEL: 'Cancel deletion',
     CONFIRM_LABEL: 'Confirm deletion',
   },
-};
+}

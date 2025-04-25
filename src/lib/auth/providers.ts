@@ -18,14 +18,12 @@ export const providers = [
       },
     },
     async authorize(credentials) {
-      
       if (!credentials?.email || !credentials?.password) return null
 
       const user = await prisma.user.findUnique({
         where: { email: credentials.email },
       })
 
- 
       if (!user || !user.password) return null
 
       const isValid = await bcrypt.compare(credentials.password, user.password)
@@ -58,6 +56,5 @@ export const providers = [
       }
     },
     allowDangerousEmailAccountLinking: true, //needed to link an existing account made with credentials
-    
   }),
 ]

@@ -11,9 +11,9 @@ cloudinary.config({
 
 // magic bytes
 const magicBytesMap: Record<string, number[]> = {
-  jpg: [0xFF, 0xD8, 0xFF],
-  jpeg: [0xFF, 0xD8, 0xFF],
-  png: [0x89, 0x50, 0x4E, 0x47],
+  jpg: [0xff, 0xd8, 0xff],
+  jpeg: [0xff, 0xd8, 0xff],
+  png: [0x89, 0x50, 0x4e, 0x47],
   webp: [0x52, 0x49, 0x46, 0x46],
 }
 
@@ -27,11 +27,17 @@ export async function POST(req: Request) {
   const file = formData.get(UPDATE_USER_FORM.INPUT_NAMES.FILE)
 
   if (!file) {
-    return NextResponse.json({ error: ERRORS.UPDATE_IMAGE.NO_FILE }, { status: 400 })
+    return NextResponse.json(
+      { error: ERRORS.UPDATE_IMAGE.NO_FILE },
+      { status: 400 }
+    )
   }
 
   if (!(file instanceof File)) {
-    return NextResponse.json({ error: ERRORS.UPDATE_IMAGE.NOT_A_FILE }, { status: 400 })
+    return NextResponse.json(
+      { error: ERRORS.UPDATE_IMAGE.NOT_A_FILE },
+      { status: 400 }
+    )
   }
 
   // validate size
@@ -77,7 +83,7 @@ export async function POST(req: Request) {
     })
 
     return NextResponse.json(result)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     return NextResponse.json(
       { error: ERRORS.UPDATE_IMAGE.UNEXPECTED },

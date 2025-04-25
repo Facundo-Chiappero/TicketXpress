@@ -14,7 +14,6 @@ import { PAGES } from '@/constants/frontend/pages'
 import { useUIStore } from '@/stores/useUIStore'
 
 export default function GeneratePasswordForm({ user }: { user: User }) {
-
   const {
     loading,
     error,
@@ -32,7 +31,7 @@ export default function GeneratePasswordForm({ user }: { user: User }) {
     toggleNewPasswordVisible,
     setNewPassword,
     setCurrentPassword,
-  } = useUIStore();
+  } = useUIStore()
 
   const router = useRouter()
 
@@ -63,7 +62,7 @@ export default function GeneratePasswordForm({ user }: { user: User }) {
       if (!res.ok) {
         throw new Error(data.error ?? ERRORS.GENERATE_PASSWORD_FORM.GENERAL)
       }
-      
+
       setUpdated(true)
       setSuccess(GENERATE_PASSWORD_FORM.SUCCESS)
       router.push(PAGES.USER.PROFILE)
@@ -94,14 +93,29 @@ export default function GeneratePasswordForm({ user }: { user: User }) {
             autoComplete="username"
             className="hidden"
             value={user.email}
+            readOnly
           />
 
-          <PasswordInput updateVisibility={toggleNewPasswordVisible} label={GENERATE_PASSWORD_FORM.NEW_PASSWORD.LABEL} passwordVisible={currentPasswordVisible} placeholder={GENERATE_PASSWORD_FORM.PLACEHOLDER} name={GENERATE_PASSWORD_FORM.NEW_PASSWORD.NAME} onChange={(e) => setCurrentPassword(e.target.value)}/>
+          <PasswordInput
+            updateVisibility={toggleNewPasswordVisible}
+            label={GENERATE_PASSWORD_FORM.NEW_PASSWORD.LABEL}
+            passwordVisible={currentPasswordVisible}
+            placeholder={GENERATE_PASSWORD_FORM.PLACEHOLDER}
+            name={GENERATE_PASSWORD_FORM.NEW_PASSWORD.NAME}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+          />
 
-          <PasswordInput updateVisibility={toggleCurrentPasswordVisible} label={GENERATE_PASSWORD_FORM.CONFIRM_PASSWORD.LABEL} passwordVisible={newPasswordVisible} placeholder={GENERATE_PASSWORD_FORM.PLACEHOLDER} name={GENERATE_PASSWORD_FORM.CONFIRM_PASSWORD.NAME} onChange={(e) => setNewPassword(e.target.value)}/>
+          <PasswordInput
+            updateVisibility={toggleCurrentPasswordVisible}
+            label={GENERATE_PASSWORD_FORM.CONFIRM_PASSWORD.LABEL}
+            passwordVisible={newPasswordVisible}
+            placeholder={GENERATE_PASSWORD_FORM.PLACEHOLDER}
+            name={GENERATE_PASSWORD_FORM.CONFIRM_PASSWORD.NAME}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
 
-          {error && <ErrorMessage error={error}/>}
-          
+          {error && <ErrorMessage error={error} />}
+
           {success && (
             <>
               <p className="text-green-700 text-sm">{success}</p>

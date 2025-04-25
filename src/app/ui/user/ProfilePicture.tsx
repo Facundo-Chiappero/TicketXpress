@@ -17,17 +17,12 @@ interface Props {
 }
 
 export default function ProfilePicture({ userImage, userName }: Props) {
-  const { image, setImage } = useEventFormStore();
-  const {
-    loading,
-    error,
-    setLoading,
-    setError,
-  } = useUIStore();
+  const { image, setImage } = useEventFormStore()
+  const { loading, error, setLoading, setError } = useUIStore()
 
   useEffect(() => {
-    if (userImage) setImage(userImage);
-  }, [userImage, setImage]);
+    if (userImage) setImage(userImage)
+  }, [userImage, setImage])
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -46,17 +41,15 @@ export default function ProfilePicture({ userImage, userName }: Props) {
       })
 
       const data = await res.json()
-      
+
       if (!res.ok) throw new Error(data.error)
       setImage(data.secure_url)
     } catch (err) {
-      
       if (err instanceof Error) {
         setError(err.message)
       } else {
         setError(ERRORS.UPDATE_USER.UNKNOWN_ERROR)
       }
-
     } finally {
       setLoading(false)
     }
@@ -108,8 +101,7 @@ export default function ProfilePicture({ userImage, userName }: Props) {
         />
       )}
 
-    {error && <ErrorMessage error={error}/>}
+      {error && <ErrorMessage error={error} />}
     </>
-
   )
 }

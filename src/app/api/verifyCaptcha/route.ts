@@ -6,13 +6,19 @@ export async function POST(req: NextRequest) {
   const { token } = await req.json()
 
   if (!token) {
-    return NextResponse.json({ success: false, error: ERRORS.VERIFY_CAPTCHA.NO_SECRET }, { status: 400 })
+    return NextResponse.json(
+      { success: false, error: ERRORS.VERIFY_CAPTCHA.NO_SECRET },
+      { status: 400 }
+    )
   }
 
   const secret = process.env.RECAPTCHA_SECRET_KEY
 
   if (!secret) {
-    return NextResponse.json({ success: false, error: ERRORS.VERIFY_CAPTCHA.NO_SECRET }, { status: 500 })
+    return NextResponse.json(
+      { success: false, error: ERRORS.VERIFY_CAPTCHA.NO_SECRET },
+      { status: 500 }
+    )
   }
 
   const response = await fetch(API_ENDPOINTS.GOOGLE_URL, {
@@ -23,5 +29,9 @@ export async function POST(req: NextRequest) {
 
   const data = await response.json()
 
-  return NextResponse.json({ success: data.success, score: data.score, ...data })
+  return NextResponse.json({
+    success: data.success,
+    score: data.score,
+    ...data,
+  })
 }

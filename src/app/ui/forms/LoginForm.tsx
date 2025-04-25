@@ -16,18 +16,28 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { useUIStore } from '@/stores/useUIStore'
 
 export default function LoginForm() {
-  const { handleSubmit, callbackUrl } =
-    useAuthAction()
-    
+  const { handleSubmit, callbackUrl } = useAuthAction()
+
   //used in Link tag
   const callbackUrlWithPageUrl = callbackUrl
     ? `?${PARAMS.AUTH_CALLBACK}=${encodeURIComponent(callbackUrl)}`
     : ''
 
-    const {recaptchaToken, setRecaptchaToken, passwordVisible, togglePasswordVisible, loading, error, success } = useUIStore()
+  const {
+    recaptchaToken,
+    setRecaptchaToken,
+    passwordVisible,
+    togglePasswordVisible,
+    loading,
+    error,
+    success,
+  } = useUIStore()
   return (
     <AuthFormWrapper title={LOGIN_FORM.TITLE} loading={loading}>
-      <form onSubmit={(e) => handleSubmit(e, recaptchaToken)} className="flex flex-col gap-4 w-full">
+      <form
+        onSubmit={(e) => handleSubmit(e, recaptchaToken)}
+        className="flex flex-col gap-4 w-full"
+      >
         <AuthInput
           name="email"
           type="email"
@@ -38,9 +48,14 @@ export default function LoginForm() {
           placeholder={LOGIN_FORM.PLACEHOLDERS.EMAIL}
         />
 
-        <PasswordInput label={LOGIN_FORM.LABELS.PASSWORD} updateVisibility={togglePasswordVisible} passwordVisible={passwordVisible} placeholder={LOGIN_FORM.PLACEHOLDERS.PASSWORD}/>
+        <PasswordInput
+          label={LOGIN_FORM.LABELS.PASSWORD}
+          updateVisibility={togglePasswordVisible}
+          passwordVisible={passwordVisible}
+          placeholder={LOGIN_FORM.PLACEHOLDERS.PASSWORD}
+        />
 
-        {error && <ErrorMessage error={error}/>}
+        {error && <ErrorMessage error={error} />}
 
         {success && (
           <>
@@ -59,11 +74,12 @@ export default function LoginForm() {
           </Link>
         </p>
 
-        <ReCAPTCHA
-  sitekey={process.env.NEXT_PUBLIC_GOOGLE_SITE_KEY!}
-  onChange={(token) => setRecaptchaToken(token)}
-/>
-
+        <div className="scale-[.85] sm:scale-100 origin-top-left">
+          <ReCAPTCHA
+            sitekey={process.env.NEXT_PUBLIC_GOOGLE_SITE_KEY!}
+            onChange={(token) => setRecaptchaToken(token)}
+          />
+        </div>
 
         <AuthButton
           Logo={Google}

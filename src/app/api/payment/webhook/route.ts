@@ -37,22 +37,20 @@ export async function POST(req: Request) {
 
         const user = await prisma.user.findUnique({
           where: {
-            id: userId
-          }
+            id: userId,
+          },
         })
 
         const email = user?.email
         const name = user?.name ?? EMAIL.GENERIC_NAME
-        
+
         if (email) {
           await resend.emails.send({
             from: EMAIL.FROM,
             to: email,
             subject: EMAIL.SUBJECT,
-            html: emailBody({amount, name}),
+            html: emailBody({ amount, name }),
           })
-
-          
         }
       }
 

@@ -1,4 +1,4 @@
-import { PAYMENT_PAGE } from "@/constants/frontend/paymentPage";
+import { PAYMENT_PAGE } from '@/constants/frontend/paymentPage'
 
 export default function Loading() {
   return (

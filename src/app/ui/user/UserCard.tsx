@@ -15,12 +15,12 @@ interface Props {
 
 export default async function UserCard({ user, amountFutureEvents }: Props) {
   const userHasPassword = await hasPassword()
-    const account = await prisma.account.findFirst({
-      where: {
-        userId: Number(user.id),
-        provider: 'google',
-      },
-    })
+  const account = await prisma.account.findFirst({
+    where: {
+      userId: Number(user.id),
+      provider: 'google',
+    },
+  })
   const isGoogleLinked = Boolean(account)
 
   return (
@@ -54,7 +54,8 @@ export default async function UserCard({ user, amountFutureEvents }: Props) {
             href={PAGES.USER.EDIT}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
           >
-            {USER_CARD.EDIT_PROFILE_BUTTON}
+            <span className='hidden xs:inline'>{USER_CARD.EDIT_PROFILE_BUTTON}</span>
+            <span className='inline xs:hidden'>{USER_CARD.ALTERNATIVE_TEXT}</span>
           </Link>
         ) : (
           <Link
@@ -72,7 +73,7 @@ export default async function UserCard({ user, amountFutureEvents }: Props) {
             method={USER_CARD.LINK_WITH_GOOGLE.METHOD}
             text={USER_CARD.LINK_WITH_GOOGLE.TEXT}
             callbackUrl={USER_CARD.LINK_WITH_GOOGLE.CALLBACK}
-            classes='bg-white text-black'
+            classes="bg-white text-black"
           />
         )}
       </div>

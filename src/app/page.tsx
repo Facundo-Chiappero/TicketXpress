@@ -5,6 +5,10 @@ import EventCard from './ui/Events/EventCard'
 import Header from './ui/Header'
 import { HOME_PAGE_TEXTS } from '@/constants/frontend/home'
 
+//todo añadir verificaciones a los eventos y quiza al auth
+//todo responsive
+//todo responsive skelly
+
 //todo mejorar modo claro
 //todo mejorar ui
 

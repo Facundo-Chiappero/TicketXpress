@@ -6,4 +6,4 @@ export const EVENT_BY_ID = {
     NOT_FOUND: 'Event not found',
     INTERNAL: 'Internal error',
   },
-};
+}

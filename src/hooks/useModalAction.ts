@@ -7,10 +7,10 @@ interface Props {
 }
 
 export default function useModalAction({ onSuccess }: Props) {
-  const { setLoading} = useUIStore()
+  const { setLoading } = useUIStore()
   const router = useRouter()
 
-  const {setError} = useUIStore()
+  const { setError } = useUIStore()
 
   const execute = async <T = unknown>(
     url: string,
@@ -36,7 +36,7 @@ export default function useModalAction({ onSuccess }: Props) {
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message)
-      }else{
+      } else {
         setError(ERRORS.SERVER_ERROR)
       }
     } finally {

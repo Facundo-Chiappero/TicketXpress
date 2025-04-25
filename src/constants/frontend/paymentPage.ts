@@ -12,4 +12,4 @@ export const PAYMENT_PAGE = {
     TITLE: 'Payment Failed ❌',
     BODY: 'There was an error processing your payment. Please try again.',
   },
-};
+}

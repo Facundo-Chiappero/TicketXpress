@@ -29,4 +29,4 @@ export const SIGN_UP_FORM = {
     LOGIN_FAILED_AFTER_SIGNUP:
       'Account created, but automatic login failed. Please log in manually.',
   },
-};
+}

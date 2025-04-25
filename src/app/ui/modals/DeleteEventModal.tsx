@@ -17,7 +17,7 @@ export default function DeleteEventModal({ event, onClose }: Props) {
 
   const handleConfirm = () => {
     execute(`${API_ENDPOINTS.EVENTS}/${event}`, {
-      method:   HTTP_METHODS.DELETE,
+      method: HTTP_METHODS.DELETE,
     })
   }
 

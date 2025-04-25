@@ -4,7 +4,7 @@ export const GENERATE_PASSWORD_PAGE = {
     BUTTON: 'Go Back',
   },
   NO_PASSWORD: {},
-};
+}
 
 export const GENERATE_PASSWORD_FORM = {
   TITLE: 'Create a Password',
@@ -23,4 +23,4 @@ export const GENERATE_PASSWORD_FORM = {
   },
   PLACEHOLDER: 'S4fe_PasSw0rd',
   SUCCESS: 'Password created successfully',
-};
+}

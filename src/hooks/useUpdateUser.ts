@@ -2,21 +2,16 @@
 
 import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 import { ERRORS } from '@/constants/frontend/errors'
-import { useUIStore } from '@/stores/useUIStore';
+import { useUIStore } from '@/stores/useUIStore'
 
 export default function useUpdateUser() {
-  const {
-    setLoading,
-    setError,
-    setUpdated,
-  } = useUIStore();
+  const { setLoading, setError, setUpdated } = useUIStore()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
     setUpdated(false)
-
 
     const form = e.currentTarget
     const formData = new FormData(form)

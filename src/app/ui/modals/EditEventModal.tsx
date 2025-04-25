@@ -33,9 +33,9 @@ export default function EditEventModal({ event, onClose }: Props) {
     setImages,
     setPrice,
     setDate,
-  } = useEventFormStore();
+  } = useEventFormStore()
   const { execute } = useModalAction({ onSuccess: onClose })
-  const {loading} = useUIStore()
+  const { loading } = useUIStore()
 
   useEscapeKey(onClose)
 

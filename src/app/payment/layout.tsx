@@ -11,5 +11,5 @@ export default async function PaymentLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <>{ children }</>
+  return <>{children}</>
 }

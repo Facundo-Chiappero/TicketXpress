@@ -1,6 +1,6 @@
 export const VERIFY_CAPTCHA = {
-  ERRORS:{
+  ERRORS: {
     NO_TOKEN: 'Token is missing',
-  NO_SECRET: 'Missing secret key'
-  }
+    NO_SECRET: 'Missing secret key',
+  },
 }
