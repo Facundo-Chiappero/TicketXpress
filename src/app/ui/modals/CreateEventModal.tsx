@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from 'react'
 import { Spinner } from '../icons/Spinner'
 import EventFormFields from '../forms/EventFormFields'
 import useEscapeKey from '@/hooks/useEscapeKey'
 import useModalAction from '@/hooks/useModalAction'
 import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 import { CREATE_EVENT_MODAL } from '@/constants/frontend/modals'
+import { useUIStore } from '@/stores/useUIStore'
+import { useEventFormStore } from '@/stores/useEventFormStore'
 
 interface Props {
   userId: string
@@ -14,13 +15,21 @@ interface Props {
 }
 
 export default function CreateEventModal({ userId, onClose }: Props) {
-  const [error, setError] = useState<string | null>(null)
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [price, setPrice] = useState(0)
-  const [date, setDate] = useState('')
-  const [images, setImages] = useState<string[]>([])
-  const { execute, loading } = useModalAction({ onSuccess: onClose, onError: setError })
+  const {
+    title,
+    description,
+    images,
+    price,
+    date,
+    setTitle,
+    setDescription,
+    setImages,
+    setPrice,
+    setDate,
+  } = useEventFormStore();
+  const { execute } = useModalAction({ onSuccess: onClose })
+    const {loading} = useUIStore()
+  
 
   useEscapeKey(onClose)
 
@@ -72,7 +81,6 @@ export default function CreateEventModal({ userId, onClose }: Props) {
             setImages={setImages}
             onClose={onClose}
             submitLabel={CREATE_EVENT_MODAL.SUBMIT_LABEL}
-            error={error}
           />
         )}
       </form>

@@ -1,23 +1,27 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { PARAMS } from '@/constants/frontend/params'
 import { PAGES } from '@/constants/frontend/pages'
 import { ERRORS } from '@/constants/frontend/errors'
 import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
+import { verifyCaptchaClient } from '@/lib/auth/verifyCaptchaClient'
+import { PROVIDERS } from '@/constants/backend/providers'
+import { useUIStore } from '@/stores/useUIStore'
 
 export default function useAuthAction(isSignUp: boolean = false) {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
+  const {setLoading, setError, setSuccess} = useUIStore()
   const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get(PARAMS.AUTH_CALLBACK) || PAGES.HOME
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+    recaptchaToken: string | null
+  ) => {
     e.preventDefault()
+
     setLoading(true)
     setError(null)
     setSuccess(null)
@@ -30,6 +34,13 @@ export default function useAuthAction(isSignUp: boolean = false) {
     const password = (formData.get('password') as string).trim()
 
     try {
+      
+      if (!recaptchaToken) throw new Error(ERRORS.INVALID_CAPTCHA)
+      const isCaptchaValid = await verifyCaptchaClient(recaptchaToken)
+
+      if (!isCaptchaValid) throw new Error(ERRORS.INVALID_CAPTCHA)
+
+      
       if (isSignUp) {
         if (!name || !email || !password) {
           setError(ERRORS.SIGN_UP_FORM.REQUIRED_FIELDS)
@@ -37,19 +48,19 @@ export default function useAuthAction(isSignUp: boolean = false) {
         }
 
         const res = await fetch(API_ENDPOINTS.SIGNUP, {
-          method: HTTP_METHODS.POST,  
+          method: HTTP_METHODS.POST,
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, email, password }),
         })
 
         const data = await res.json()
-
         if (!res.ok) {
-          throw new Error (data.error ?? ERRORS.SIGN_UP_FORM.GENERAL)
+          setError(data.error ?? ERRORS.SIGN_UP_FORM.GENERAL)
+          return
         }
       }
 
-      const result = await signIn('credentials', {
+      const result = await signIn(PROVIDERS.AUTH_PROVIDERS.CREDENTIALS, {
         email,
         password,
         callbackUrl,
@@ -82,5 +93,5 @@ export default function useAuthAction(isSignUp: boolean = false) {
     }
   }
 
-  return { handleSubmit, loading, error, setError, success, callbackUrl }
+  return { handleSubmit, callbackUrl }
 }

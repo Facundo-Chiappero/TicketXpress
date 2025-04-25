@@ -12,4 +12,6 @@ export const enum API_ENDPOINTS {
   SIGNUP = '/api/auth/signup',
   PAYMENT = '/api/payment',
   CREATE_PASSWORD = '/api/createPassword',
+  GOOGLE_URL = 'https://www.google.com/recaptcha/api/siteverify',
+  VERIFY_CAPTCHA = '/api/verifyCaptcha'
 }

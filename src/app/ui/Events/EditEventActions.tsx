@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import { Clipboard } from '@/app/ui/icons/Clipboard'
 import { Trash } from '@/app/ui/icons/Trash'
@@ -8,6 +7,7 @@ import IconButton from '@/app/ui/buttons/IconButton'
 import { Spinner } from '@/app/ui/icons/Spinner'
 import { Event } from '@/types'
 import { EDIT_EVENT_ACTIONS } from '@/constants/frontend/editEventActions'
+import { useUIStore } from '@/stores/useUIStore'
 
 const MODAL_LOADING_FALLBACK = () => (
   <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
@@ -29,8 +29,8 @@ const DeleteEventModal = dynamic(
 )
 
 export default function EditEventActions({ event }: { event: Event }) {
-  const [isEditing, setIsEditing] = useState(false)
-  const [isDeleting, setIsDeleting] = useState(false)
+    const { isDeleting, isEditing, setIsDeleting, setIsEditing} = useUIStore()
+  
 
   return (
     <>

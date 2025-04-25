@@ -1,7 +1,6 @@
 'use client'
 
 import AuthFormWrapper from '../forms/AuthFormWrapper'
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import RefreshSession from '@/lib/session/RefreshSession'
 import { User } from '@/types'
@@ -12,24 +11,39 @@ import { ERRORS } from '@/constants/frontend/errors'
 import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 import { GENERATE_PASSWORD_FORM } from '@/constants/frontend/generatePassword'
 import { PAGES } from '@/constants/frontend/pages'
+import { useUIStore } from '@/stores/useUIStore'
 
 export default function GeneratePasswordForm({ user }: { user: User }) {
-  const [currentPasswordVisible, setCurrentPasswordVisible] = useState(false)
-  const [newPasswordVisible, setNewPasswordVisible] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [updated, setUpdated] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+
+  const {
+    loading,
+    error,
+    success,
+    updated,
+    currentPasswordVisible,
+    newPasswordVisible,
+    newPassword,
+    currentPassword,
+    setLoading,
+    setError,
+    setSuccess,
+    setUpdated,
+    toggleCurrentPasswordVisible,
+    toggleNewPasswordVisible,
+    setNewPassword,
+    setCurrentPassword,
+  } = useUIStore();
+
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    setError('')
+    setError(null)
+    setSuccess(null)
+    setUpdated(false)
 
-    if (newPassword !== confirmPassword) {
+    if (newPassword !== currentPassword) {
       setError(ERRORS.GENERATE_PASSWORD_FORM.DIFFERENT_PASSWORDS)
       setLoading(false)
       return
@@ -82,9 +96,9 @@ export default function GeneratePasswordForm({ user }: { user: User }) {
             value={user.email}
           />
 
-          <PasswordInput updateVisibility={() => setCurrentPasswordVisible(prev => !prev)} label={GENERATE_PASSWORD_FORM.NEW_PASSWORD.LABEL} passwordVisible={currentPasswordVisible} placeholder={GENERATE_PASSWORD_FORM.PLACEHOLDER} name={GENERATE_PASSWORD_FORM.NEW_PASSWORD.NAME} onChange={(e) => setConfirmPassword(e.target.value)}/>
+          <PasswordInput updateVisibility={toggleNewPasswordVisible} label={GENERATE_PASSWORD_FORM.NEW_PASSWORD.LABEL} passwordVisible={currentPasswordVisible} placeholder={GENERATE_PASSWORD_FORM.PLACEHOLDER} name={GENERATE_PASSWORD_FORM.NEW_PASSWORD.NAME} onChange={(e) => setCurrentPassword(e.target.value)}/>
 
-          <PasswordInput updateVisibility={() => setNewPasswordVisible(prev => !prev)} label={GENERATE_PASSWORD_FORM.CONFIRM_PASSWORD.LABEL} passwordVisible={newPasswordVisible} placeholder={GENERATE_PASSWORD_FORM.PLACEHOLDER} name={GENERATE_PASSWORD_FORM.CONFIRM_PASSWORD.NAME} onChange={(e) => setNewPassword(e.target.value)}/>
+          <PasswordInput updateVisibility={toggleCurrentPasswordVisible} label={GENERATE_PASSWORD_FORM.CONFIRM_PASSWORD.LABEL} passwordVisible={newPasswordVisible} placeholder={GENERATE_PASSWORD_FORM.PLACEHOLDER} name={GENERATE_PASSWORD_FORM.CONFIRM_PASSWORD.NAME} onChange={(e) => setNewPassword(e.target.value)}/>
 
           {error && <ErrorMessage error={error}/>}
           

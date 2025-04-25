@@ -24,8 +24,6 @@ export async function POST(req: NextRequest) {
     }
 
     const emailRegex = SIGNUP.REGEX
-    console.log(emailRegex)
-
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: ERRORS.SIGNUP.INVALID_EMAIL },
@@ -33,9 +31,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
-    })
+    const existingUser = await prisma.user.findUnique({ where: { email } })
 
     if (existingUser) {
       return NextResponse.json(
@@ -55,9 +51,8 @@ export async function POST(req: NextRequest) {
     })
 
     return NextResponse.json({ message: SIGNUP.SUCCESS }, { status: 201 })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.error(ERRORS.SIGNUP.INTERNAL, error)
-
     return NextResponse.json(
       { error: ERRORS.SIGNUP.CREATING_USER },
       { status: 500 }

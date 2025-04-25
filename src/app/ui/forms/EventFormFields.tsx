@@ -6,6 +6,7 @@ import { EVENT_FORM_FIELDS } from '@/constants/frontend/eventFormFields'
 import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 import { ERRORS } from '@/constants/frontend/errors'
 import { PROFILE_PICTURE } from '@/constants/frontend/profilePicture'
+import { useUIStore } from '@/stores/useUIStore'
 
 interface Props {
   title: string
@@ -20,7 +21,6 @@ interface Props {
   setImages: (val: string[]) => void
   onClose: () => void
   submitLabel: string
-  error: string | null
 }
 
 export default function EventFormFields({
@@ -36,8 +36,9 @@ export default function EventFormFields({
   setImages,
   onClose,
   submitLabel = EVENT_FORM_FIELDS.BUTTONS.SAVE,
-  error
 }: Props) {
+  const {error, setError} = useUIStore()
+
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || [])
     if (files.length === 0) return
@@ -63,7 +64,11 @@ export default function EventFormFields({
       const uploadedUrls = await Promise.all(uploadPromises)
       setImages([...images, ...uploadedUrls])
     } catch (err) {
-      console.error(ERRORS.PROFILE_PICTURE.GENERIC_UPLOAD_ERROR, err)
+      if(err instanceof Error){
+        setError(err.message)
+      }else{
+        setError(ERRORS.PROFILE_PICTURE.GENERIC_UPLOAD_ERROR)
+      }
     }
   }
 

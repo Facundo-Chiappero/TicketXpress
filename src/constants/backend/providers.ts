@@ -4,11 +4,6 @@ export const PROVIDERS = {
     GOOGLE: 'google',
   },
 
-  FIELD_TYPES: {
-    EMAIL: 'email',
-    PASSWORD: 'password',
-  },
-
   GOOGLE: {
     CLIENT_ID: process.env.GOOGLE_CLIENT_ID!,
     CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET!,
@@ -22,4 +17,9 @@ export const PROVIDERS = {
     EMAIL: 'Email',
     PASSWORD: 'Password',
   },
+
+  CREDENTIAL_KEYS: {
+    EMAIL: 'email',
+    PASSWORD: 'password',
+  }
 };

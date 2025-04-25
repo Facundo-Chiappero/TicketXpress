@@ -43,9 +43,13 @@ export default async function CheckOutButton({
   return (
     <div className="w-fit">
       {preferenceId ? (
-        <div>
-          <WalletWrapper preferenceId={preferenceId} />
-        </div>
+        <div className="max-w-72">
+        <WalletWrapper preferenceId={preferenceId} />
+        <small className="mt-2 block text-s text-red-600 font-medium">
+          ⚠️ Important: This is a fake event created for educational purposes only. However, the payment is real — we are not responsible for any unintended transactions.
+        </small>
+      </div>
+      
       ) : (
         <Spinner />
       )}

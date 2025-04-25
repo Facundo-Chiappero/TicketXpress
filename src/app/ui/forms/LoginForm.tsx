@@ -8,24 +8,26 @@ import { Google } from '../icons/Google'
 import useAuthAction from '@/hooks/useAuthAction'
 import RedirectButton from '../buttons/RedirectButton'
 import ErrorMessage from './ErrorMessage'
-import { useState } from 'react'
 import PasswordInput from './PasswordInput'
 import { PARAMS } from '@/constants/frontend/params'
 import { LOGIN_FORM } from '@/constants/frontend/loginForm'
 import { PAGES } from '@/constants/frontend/pages'
+import ReCAPTCHA from 'react-google-recaptcha'
+import { useUIStore } from '@/stores/useUIStore'
 
 export default function LoginForm() {
-  const { handleSubmit, loading, error, success, callbackUrl } =
+  const { handleSubmit, callbackUrl } =
     useAuthAction()
-    const [passwordVisible, setPasswordVisible] = useState(false)
+    
   //used in Link tag
   const callbackUrlWithPageUrl = callbackUrl
     ? `?${PARAMS.AUTH_CALLBACK}=${encodeURIComponent(callbackUrl)}`
     : ''
 
+    const {recaptchaToken, setRecaptchaToken, passwordVisible, togglePasswordVisible, loading, error, success } = useUIStore()
   return (
     <AuthFormWrapper title={LOGIN_FORM.TITLE} loading={loading}>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
+      <form onSubmit={(e) => handleSubmit(e, recaptchaToken)} className="flex flex-col gap-4 w-full">
         <AuthInput
           name="email"
           type="email"
@@ -36,7 +38,7 @@ export default function LoginForm() {
           placeholder={LOGIN_FORM.PLACEHOLDERS.EMAIL}
         />
 
-        <PasswordInput label={LOGIN_FORM.LABELS.PASSWORD} updateVisibility={() => setPasswordVisible(prev => !prev)} passwordVisible={passwordVisible} placeholder={LOGIN_FORM.PLACEHOLDERS.PASSWORD}/>
+        <PasswordInput label={LOGIN_FORM.LABELS.PASSWORD} updateVisibility={togglePasswordVisible} passwordVisible={passwordVisible} placeholder={LOGIN_FORM.PLACEHOLDERS.PASSWORD}/>
 
         {error && <ErrorMessage error={error}/>}
 
@@ -56,6 +58,12 @@ export default function LoginForm() {
             {LOGIN_FORM.BUTTONS.REDIRECT_LINK}
           </Link>
         </p>
+
+        <ReCAPTCHA
+  sitekey={process.env.NEXT_PUBLIC_GOOGLE_SITE_KEY!}
+  onChange={(token) => setRecaptchaToken(token)}
+/>
+
 
         <AuthButton
           Logo={Google}

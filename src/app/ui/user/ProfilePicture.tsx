@@ -2,12 +2,14 @@
 
 import UserImage from '@/app/ui/user/UserImage'
 
-import { useState } from 'react'
+import { useEffect } from 'react'
 import ErrorMessage from '../forms/ErrorMessage'
 import { UPDATE_USER_FORM } from '@/constants/frontend/updateUserForm'
 import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 import { ERRORS } from '@/constants/frontend/errors'
 import { PROFILE_PICTURE } from '@/constants/frontend/profilePicture'
+import { useUIStore } from '@/stores/useUIStore'
+import { useEventFormStore } from '@/stores/useEventFormStore'
 
 interface Props {
   userImage: string | undefined
@@ -15,15 +17,24 @@ interface Props {
 }
 
 export default function ProfilePicture({ userImage, userName }: Props) {
-  const [image, setImage] = useState<string | null>(userImage ?? null)
-  const [loading, setLoading] = useState<boolean>(false)
-  const [error, setError] = useState<string | null>(null)
+  const { image, setImage } = useEventFormStore();
+  const {
+    loading,
+    error,
+    setLoading,
+    setError,
+  } = useUIStore();
+
+  useEffect(() => {
+    if (userImage) setImage(userImage);
+  }, [userImage, setImage]);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
 
     setLoading(true)
+    setError(null)
 
     const formData = new FormData()
     formData.append(UPDATE_USER_FORM.INPUT_NAMES.FILE, file)

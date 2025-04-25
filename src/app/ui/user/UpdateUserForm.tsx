@@ -8,14 +8,20 @@ import ProfilePicture from '@/app/ui/user/ProfilePicture'
 import RefreshSession from '@/lib/session/RefreshSession'
 import ErrorMessage from '@/app/ui/forms/ErrorMessage'
 import PasswordInput from '../forms/PasswordInput'
-import { useState } from 'react'
 import { UPDATE_USER_FORM } from '@/constants/frontend/updateUserForm'
+import { useUIStore } from '@/stores/useUIStore'
 
 export default function UpdateUserForm({ user }: { user: User }) {
-  const { handleSubmit, loading, updated, error } = useUpdateUser()
-  const [newPasswordVisible, setNewPasswordVisible] = useState(false)
-  const [oldPasswordVisible, setOldPasswordVisible] = useState(false)
-
+  const { handleSubmit } = useUpdateUser()
+const {
+  loading,
+  error,
+  updated,
+  newPasswordVisible,
+  currentPasswordVisible,
+  toggleNewPasswordVisible,
+  toggleCurrentPasswordVisible
+} = useUIStore();
   return (
     <>
       <AuthFormWrapper title={UPDATE_USER_FORM.TITLE} loading={loading}>
@@ -48,8 +54,9 @@ export default function UpdateUserForm({ user }: { user: User }) {
             placeholder={UPDATE_USER_FORM.PLACEHOLDERS.EMAIL}
           />
 
-          <PasswordInput label={UPDATE_USER_FORM.LABELS.OLD_PASSWORD} placeholder={UPDATE_USER_FORM.PLACEHOLDERS.OLD_PASSWORD} passwordVisible={oldPasswordVisible} updateVisibility={() => setOldPasswordVisible(prev => !prev)} aria_label={UPDATE_USER_FORM.LABELS.OLD_PASSWORD} />
-          <PasswordInput label={UPDATE_USER_FORM.LABELS.NEW_PASSWORD} placeholder={UPDATE_USER_FORM.PLACEHOLDERS.NEW_PASSWORD} passwordVisible={newPasswordVisible} updateVisibility={() => setNewPasswordVisible(prev => !prev)} aria_label={UPDATE_USER_FORM.LABELS.NEW_PASSWORD} />
+          <PasswordInput label={UPDATE_USER_FORM.LABELS.CURRENT_PASSWORD} placeholder={UPDATE_USER_FORM.PLACEHOLDERS.CURRENT_PASSWORD} passwordVisible={currentPasswordVisible} updateVisibility={toggleNewPasswordVisible} aria_label={UPDATE_USER_FORM.LABELS.CURRENT_PASSWORD} />
+
+          <PasswordInput label={UPDATE_USER_FORM.LABELS.NEW_PASSWORD} placeholder={UPDATE_USER_FORM.PLACEHOLDERS.NEW_PASSWORD} passwordVisible={newPasswordVisible} updateVisibility={toggleCurrentPasswordVisible} aria_label={UPDATE_USER_FORM.LABELS.NEW_PASSWORD} />
 
           <ProfilePicture userImage={user.image} userName={user.name} />
 

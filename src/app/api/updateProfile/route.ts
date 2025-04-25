@@ -26,8 +26,8 @@ export async function PATCH(req: Request) {
 
   const name = body.get(UPDATE_USER_FORM.INPUT_NAMES.NAME) as string
   const email = body.get(UPDATE_USER_FORM.INPUT_NAMES.EMAIL) as string
-  const oldPassword = body.get(
-    UPDATE_USER_FORM.INPUT_NAMES.OLD_PASSWORD
+  const currentPassword = body.get(
+    UPDATE_USER_FORM.INPUT_NAMES.CURRENT_PASSWORD
   ) as string
   const newPassword = body.get(
     UPDATE_USER_FORM.INPUT_NAMES.NEW_PASSWORD
@@ -54,7 +54,7 @@ export async function PATCH(req: Request) {
     )
   }
 
-  const passwordMatches = await bcrypt.compare(oldPassword, user.password)
+  const passwordMatches = await bcrypt.compare(currentPassword, user.password)
 
   if (!passwordMatches) {
     return NextResponse.json(

@@ -13,7 +13,6 @@ export async function POST(req: Request) {
     const { id, title, unit_price, userId, eventId } = await req.json()
 
     if (!title || !unit_price || !userId) {
-      console.warn(ERRORS.PAYMENT.MISSING)
       return NextResponse.json(
         { message: PAYMENT_MESSAGES.MISSING_DATA },
         { status: 400 }
@@ -51,8 +50,8 @@ export async function POST(req: Request) {
     })
 
     return NextResponse.json({ id: result.id })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.error(ERRORS.PAYMENT.CREATE, error)
     return NextResponse.json(
       { message: PAYMENT_MESSAGES.CREATE_ERROR },
       { status: 500 }

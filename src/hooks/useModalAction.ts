@@ -1,15 +1,16 @@
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ERRORS } from '@/constants/frontend/errors'
+import { useUIStore } from '@/stores/useUIStore'
 
 interface Props {
   onSuccess?: () => void
-  onError?: (error: string) => void
 }
 
-export default function useModalAction({ onSuccess, onError }: Props) {
-  const [loading, setLoading] = useState(false)
+export default function useModalAction({ onSuccess }: Props) {
+  const { setLoading} = useUIStore()
   const router = useRouter()
+
+  const {setError} = useUIStore()
 
   const execute = async <T = unknown>(
     url: string,
@@ -34,14 +35,14 @@ export default function useModalAction({ onSuccess, onError }: Props) {
       router.refresh()
     } catch (err) {
       if (err instanceof Error) {
-        onError?.(err.message)
+        setError(err.message)
       }else{
-        onError?.(ERRORS.SERVER_ERROR)
+        setError(ERRORS.SERVER_ERROR)
       }
     } finally {
       setLoading(false)
     }
   }
 
-  return { execute, loading }
+  return { execute }
 }

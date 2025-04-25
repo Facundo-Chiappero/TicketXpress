@@ -3,6 +3,9 @@ import { MercadoPagoConfig, Payment as MPPayment } from 'mercadopago'
 import { prisma } from '@/lib/prisma'
 import { PAYMENT } from '@/constants/backend/payment'
 import { ERRORS } from '@/constants/backend/errors'
+import { resend } from '@/lib/email/resend'
+import { emailBody } from '@/lib/email/emailBody'
+import { EMAIL } from '@/constants/backend/email'
 
 const client = new MercadoPagoConfig({
   accessToken: process.env.NEXT_PUBLIC_MP_ACCESS_TOKEN || '',
@@ -31,6 +34,26 @@ export async function POST(req: Request) {
             amount,
           },
         })
+
+        const user = await prisma.user.findUnique({
+          where: {
+            id: userId
+          }
+        })
+
+        const email = user?.email
+        const name = user?.name ?? EMAIL.GENERIC_NAME
+        
+        if (email) {
+          await resend.emails.send({
+            from: EMAIL.FROM,
+            to: email,
+            subject: EMAIL.SUBJECT,
+            html: emailBody({amount, name}),
+          })
+
+          
+        }
       }
 
       return NextResponse.json(

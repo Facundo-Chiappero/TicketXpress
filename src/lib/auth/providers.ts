@@ -10,20 +10,22 @@ export const providers = [
     credentials: {
       email: {
         label: PROVIDERS.FORM_LABELS.EMAIL,
-        type: PROVIDERS.FIELD_TYPES.EMAIL,
+        type: PROVIDERS.CREDENTIAL_KEYS.EMAIL,
       },
       password: {
         label: PROVIDERS.FORM_LABELS.PASSWORD,
-        type: PROVIDERS.FIELD_TYPES.PASSWORD,
+        type: PROVIDERS.CREDENTIAL_KEYS.PASSWORD,
       },
     },
     async authorize(credentials) {
+      
       if (!credentials?.email || !credentials?.password) return null
 
       const user = await prisma.user.findUnique({
         where: { email: credentials.email },
       })
 
+ 
       if (!user || !user.password) return null
 
       const isValid = await bcrypt.compare(credentials.password, user.password)

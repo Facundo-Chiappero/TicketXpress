@@ -3,7 +3,7 @@ export const UPDATE_USER_FORM = {
   LABELS: {
     NAME: 'New Name',
     EMAIL: 'New Email',
-    OLD_PASSWORD: 'Current Password',
+    CURRENT_PASSWORD: 'Current Password',
     NEW_PASSWORD: 'New Password',
     IMAGE: 'New Image (optional)',
   },
@@ -12,7 +12,7 @@ export const UPDATE_USER_FORM = {
   INPUT_NAMES: {
     NAME: 'name',
     EMAIL: 'email',
-    OLD_PASSWORD: 'oldPassword',
+    CURRENT_PASSWORD: 'currentPassword',
     NEW_PASSWORD: 'newPassword',
     IMAGE: 'image',
     FILE: 'file',
@@ -24,7 +24,7 @@ export const UPDATE_USER_FORM = {
   PLACEHOLDERS: {
     NAME: 'John Doe',
     EMAIL: 'john@gmail.com',
-    OLD_PASSWORD: 'your password',
+    CURRENT_PASSWORD: 'your password',
     NEW_PASSWORD: 'S4fe_PasSw0rd',
     IMAGE: 'Profile Picture',
   },

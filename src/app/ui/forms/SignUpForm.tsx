@@ -9,24 +9,28 @@ import AuthButton from '../buttons/AuthButton'
 import RedirectButton from '../buttons/RedirectButton'
 import ErrorMessage from './ErrorMessage'
 import PasswordInput from './PasswordInput'
-import { useState } from 'react'
 import { PARAMS } from '@/constants/frontend/params'
 import { SIGN_UP_FORM } from '@/constants/frontend/signupForm'
 import { PAGES } from '@/constants/frontend/pages'
+import ReCAPTCHA from 'react-google-recaptcha'
+import { PROVIDERS } from '@/constants/backend/providers'
+import { useUIStore } from '@/stores/useUIStore'
+
 
 export default function SignUpForm() {
-  const { handleSubmit, loading, error, success, callbackUrl } =
+  const { handleSubmit, callbackUrl } =
     useAuthAction(true)
   //used in Link tag
   const callbackUrlWithPageUrl = callbackUrl
     ? `?${PARAMS.AUTH_CALLBACK}=${encodeURIComponent(callbackUrl)}`
     : ''
-        const [passwordVisible, setPasswordVisible] = useState(false)
     
+            const {recaptchaToken, setRecaptchaToken, passwordVisible, togglePasswordVisible, loading, error, success } = useUIStore()
+        
 
   return (
     <AuthFormWrapper title={SIGN_UP_FORM.TITLE} loading={loading}>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
+      <form onSubmit={(e) => handleSubmit(e, recaptchaToken)} className="flex flex-col gap-4 w-full">
         <AuthInput
           name="name"
           type="text"
@@ -38,14 +42,14 @@ export default function SignUpForm() {
         />
 
         <AuthInput
-          name="email"
+          name={PROVIDERS.CREDENTIAL_KEYS.EMAIL}
           type="email"
           required
           label={SIGN_UP_FORM.LABELS.EMAIL}
           autoComplete="email"
           placeholder={SIGN_UP_FORM.PLACEHOLDERS.EMAIL}
         />
-                <PasswordInput label={SIGN_UP_FORM.LABELS.PASSWORD} updateVisibility={() => setPasswordVisible(prev => !prev)} passwordVisible={passwordVisible} placeholder={SIGN_UP_FORM.PLACEHOLDERS.PASSWORD} />
+                <PasswordInput label={SIGN_UP_FORM.LABELS.PASSWORD} name={PROVIDERS.CREDENTIAL_KEYS.PASSWORD} updateVisibility={togglePasswordVisible} passwordVisible={passwordVisible} placeholder={SIGN_UP_FORM.PLACEHOLDERS.PASSWORD} />
         
 
                 {error && <ErrorMessage error={error}/>}
@@ -66,6 +70,11 @@ export default function SignUpForm() {
             {SIGN_UP_FORM.BUTTONS.REDIRECT_LINK}
           </Link>
         </p>
+
+        <ReCAPTCHA
+  sitekey={process.env.NEXT_PUBLIC_GOOGLE_SITE_KEY!}
+  onChange={(token) => setRecaptchaToken(token)}
+/>
 
         <AuthButton
           Logo={Google}

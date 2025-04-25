@@ -77,8 +77,8 @@ export async function POST(req: Request) {
     })
 
     return NextResponse.json(result)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
-    console.error('[Upload error]', err)
     return NextResponse.json(
       { error: ERRORS.UPDATE_IMAGE.UNEXPECTED },
       { status: 500 }

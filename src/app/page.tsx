@@ -5,13 +5,10 @@ import EventCard from './ui/Events/EventCard'
 import Header from './ui/Header'
 import { HOME_PAGE_TEXTS } from '@/constants/frontend/home'
 
-//todo mostrar toast en todos lado donde use apis o donde sea necesario
-
-//todo ADD CAPTCHA 🤯
-
-//todo mandar mail con el ticket cuando el pago sea aprobado
 //todo mejorar modo claro
 //todo mejorar ui
+
+//todo revisar lo del email, si ya se configuro
 export default async function HomePage() {
   const session = await getServerSession(authOptions)
   const events = await getAllEvents()

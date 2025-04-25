@@ -26,7 +26,7 @@ export default async function BuyEventPage({ params }: Props) {
   return (
     <>
       <Header title={METADATA.LAYOUTS.EVENT.TITLE} user={session?.user} />
-      <main className="py-20 px-12 flex flex-col">
+      <main className="py-8 px-12 flex flex-col">
         <section className="mb-6">
           <h1 className="text-3xl font-bold mb-4">{event.title}</h1>
           <p className="mb-2 text-gray-400">{event.description}</p>

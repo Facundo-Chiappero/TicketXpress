@@ -1,10 +1,11 @@
 'use client'
 
-import { Suspense, useState } from 'react'
+import { Suspense } from 'react'
 import { Spinner } from '../icons/Spinner'
 import dynamic from 'next/dynamic'
 import { CurrentUser, ROLES } from '@/types'
 import { CREATE_EVENT_MODAL } from '@/constants/frontend/modals'
+import { useUIStore } from '@/stores/useUIStore'
 
 // Lazy import con suspense
 const CreateEventModal = dynamic(
@@ -20,8 +21,7 @@ const CreateEventModal = dynamic(
 )
 
 export default function CreateEventButton({ user }: { user: CurrentUser }) {
-  const [showModal, setShowModal] = useState(false)
-
+  const { showModal, setShowModal} = useUIStore()
   return (
     <>
       {user?.role === ROLES.ADMIN && (
