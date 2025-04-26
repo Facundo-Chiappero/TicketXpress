@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     template: `${METADATA.LAYOUTS.HOME.TITLE} - %s`,
   },
   description: METADATA.LAYOUTS.HOME.DESCRIPTION,
+  icons: {
+    icon: '/favicon.png',
+  }
 }
 
 export default function RootLayout({
