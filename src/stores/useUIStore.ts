@@ -47,7 +47,6 @@ type UIState = {
 
   setEventBeingEdited: (event: Event | null) => void
 
-
   resetUI: () => void
 }
 

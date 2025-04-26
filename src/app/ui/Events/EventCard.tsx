@@ -22,8 +22,10 @@ export default function EventCard({ event, currentUser }: Props) {
   )
 
   return (
-    <article className="bg-white dark:bg-zinc-900 shadow-md dark:shadow-black/30 rounded-lg overflow-hidden border-zinc-200 dark:border-zinc-700 transition-colors w-[80%] min-w-60 border border-black/30
-">
+    <article
+      className="bg-white dark:bg-zinc-900 shadow-md dark:shadow-black/30 rounded-lg overflow-hidden border-zinc-200 dark:border-zinc-700 transition-colors w-[80%] min-w-60 border border-black/30
+"
+    >
       {event.images.length > 0 && (
         <figure>
           {event.images.map((src, i) => (

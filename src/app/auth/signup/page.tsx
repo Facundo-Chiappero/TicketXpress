@@ -4,7 +4,6 @@ import { ToastContainer } from 'react-toastify'
 
 export default async function SignUpPage() {
   return (
-
     <>
       <header className="m-4">
         <GoHomeButton />

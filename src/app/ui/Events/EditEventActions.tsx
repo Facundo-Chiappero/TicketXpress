@@ -29,7 +29,14 @@ const DeleteEventModal = dynamic(
 )
 
 export default function EditEventActions({ event }: { event: Event }) {
-  const { isDeleting, isEditing, eventBeingEdited, setIsDeleting, setIsEditing, setEventBeingEdited } = useUIStore()
+  const {
+    isDeleting,
+    isEditing,
+    eventBeingEdited,
+    setIsDeleting,
+    setIsEditing,
+    setEventBeingEdited,
+  } = useUIStore()
 
   return (
     <>
@@ -56,17 +63,18 @@ export default function EditEventActions({ event }: { event: Event }) {
       </div>
 
       {isEditing && eventBeingEdited?.id === event.id && (
-  <EditEventModal
-    event={eventBeingEdited}
-    onClose={() => {
-      setIsEditing(false)
-      setEventBeingEdited(null)
-    }}
-    aria-labelledby={EDIT_EVENT_ACTIONS.MODAL_LABELS.EDIT_EVENT_TITLE}
-    aria-describedby={EDIT_EVENT_ACTIONS.MODAL_LABELS.EDIT_EVENT_DESCRIPTION}
-  />
-)}
-
+        <EditEventModal
+          event={eventBeingEdited}
+          onClose={() => {
+            setIsEditing(false)
+            setEventBeingEdited(null)
+          }}
+          aria-labelledby={EDIT_EVENT_ACTIONS.MODAL_LABELS.EDIT_EVENT_TITLE}
+          aria-describedby={
+            EDIT_EVENT_ACTIONS.MODAL_LABELS.EDIT_EVENT_DESCRIPTION
+          }
+        />
+      )}
 
       {isDeleting && (
         <DeleteEventModal

@@ -21,7 +21,7 @@ export default function PasswordInput({
   onChange,
   name,
   aria_label,
-  required = true
+  required = true,
 }: Props) {
   return (
     <div className="relative flex-col flex gap-y-4">

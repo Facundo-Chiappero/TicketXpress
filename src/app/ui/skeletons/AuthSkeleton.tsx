@@ -3,11 +3,7 @@ import InputSkeleton from './InputSkeleton'
 export default function AuthSkeleton({ amount }: { amount: number }) {
   return (
     <>
-      <header
-        className="flex m-4 w-full"
-        role="status"
-        aria-live="polite"
-      >
+      <header className="flex m-4 w-full" role="status" aria-live="polite">
         <div className="h-8 w-1/12 min-w-24 bg-zinc-300 dark:bg-zinc-700 rounded" />
       </header>
       <main className="w-full flex sm:items-center justify-center">

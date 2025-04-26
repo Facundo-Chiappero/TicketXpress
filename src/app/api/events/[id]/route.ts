@@ -19,12 +19,15 @@ export async function PATCH(
   }
 
   const error = validateEventBody(body)
-  if (error) return NextResponse.json({ error: error.error }, { status: error.status })
+  if (error)
+    return NextResponse.json({ error: error.error }, { status: error.status })
 
   const existingEvent = await prisma.event.findUnique({ where: { id } })
   if (!existingEvent) {
-    return NextResponse.json({ error: ERRORS.EVENT_BY_ID.NOT_FOUND }, { status: 404 })
-
+    return NextResponse.json(
+      { error: ERRORS.EVENT_BY_ID.NOT_FOUND },
+      { status: 404 }
+    )
   }
 
   try {
@@ -37,7 +40,7 @@ export async function PATCH(
         date: new Date(body.date),
         ...(body.images ? { images: { set: body.images } } : {}),
       },
-    }) 
+    })
 
     return NextResponse.json(updatedEvent)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -65,8 +68,10 @@ export async function DELETE(
 
   const existingEvent = await prisma.event.findUnique({ where: { id } })
   if (!existingEvent) {
-    return NextResponse.json({ error: ERRORS.EVENT_BY_ID.NOT_FOUND }, { status: 404 })
-
+    return NextResponse.json(
+      { error: ERRORS.EVENT_BY_ID.NOT_FOUND },
+      { status: 404 }
+    )
   }
 
   try {
@@ -100,8 +105,10 @@ export async function GET(
 
   const existingEvent = await prisma.event.findUnique({ where: { id } })
   if (!existingEvent) {
-    return NextResponse.json({ error: ERRORS.EVENT_BY_ID.NOT_FOUND }, { status: 404 })
-
+    return NextResponse.json(
+      { error: ERRORS.EVENT_BY_ID.NOT_FOUND },
+      { status: 404 }
+    )
   }
 
   try {

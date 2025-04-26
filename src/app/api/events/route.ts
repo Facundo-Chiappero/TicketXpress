@@ -8,8 +8,8 @@ export async function POST(req: Request) {
   const { title, description, price, date, images = [], creatorId } = body
 
   const error = validateEventBody(body)
-  if (error) return NextResponse.json({ error: error.error }, { status: error.status })
-
+  if (error)
+    return NextResponse.json({ error: error.error }, { status: error.status })
 
   const event = await prisma.event.create({
     data: {

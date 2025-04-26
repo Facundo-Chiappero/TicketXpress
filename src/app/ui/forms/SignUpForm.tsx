@@ -98,7 +98,7 @@ export default function SignUpForm() {
           callbackUrl={callbackUrl}
         />
 
-<button
+        <button
           type="submit"
           disabled={loading}
           className="mt-2 flex items-center justify-center rounded-full px-4 py-2 font-semibold bg-zinc-800 text-white border-white/15 border-2 self-center hover:bg-zinc-900"

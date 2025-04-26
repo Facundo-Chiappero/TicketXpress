@@ -54,8 +54,12 @@ export default async function UserCard({ user, amountFutureEvents }: Props) {
             href={PAGES.USER.EDIT}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
           >
-            <span className='hidden xs:inline'>{USER_CARD.EDIT_PROFILE_BUTTON}</span>
-            <span className='inline xs:hidden'>{USER_CARD.ALTERNATIVE_TEXT}</span>
+            <span className="hidden xs:inline">
+              {USER_CARD.EDIT_PROFILE_BUTTON}
+            </span>
+            <span className="inline xs:hidden">
+              {USER_CARD.ALTERNATIVE_TEXT}
+            </span>
           </Link>
         ) : (
           <Link

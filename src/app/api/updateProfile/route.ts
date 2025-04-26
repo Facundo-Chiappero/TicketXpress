@@ -54,7 +54,6 @@ export async function PATCH(req: Request) {
     )
   }
 
-  
   const passwordMatches = await bcrypt.compare(currentPassword, user.password)
 
   if (!passwordMatches) {

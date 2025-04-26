@@ -29,7 +29,9 @@ export default async function BuyEventPage({ params }: Props) {
       <main className="py-8 flex flex-col mx-4 justify-self-center">
         <section className="mb-6">
           <h1 className="text-3xl font-bold mb-4">{event.title}</h1>
-          <p className="mb-2 dark:text-gray-400 text-gray-600">{event.description}</p>
+          <p className="mb-2 dark:text-gray-400 text-gray-600">
+            {event.description}
+          </p>
           <p className="mb-2 dark:text-gray-300 text-gray-500">
             {EVENT_CARD.DATE_LABEL} {new Date(event.date).toLocaleDateString()}
           </p>

@@ -16,7 +16,7 @@ export default function DeleteEventModal({ event, onClose }: Props) {
   const { execute } = useModalAction({ onSuccess: onClose })
   useEscapeKey(onClose)
 
-  const {loading} = useUIStore()
+  const { loading } = useUIStore()
 
   const handleConfirm = () => {
     execute(`${API_ENDPOINTS.EVENTS}/${event}`, {

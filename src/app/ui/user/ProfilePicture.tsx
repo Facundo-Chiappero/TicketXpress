@@ -19,7 +19,7 @@ interface Props {
 export default function ProfilePicture({ userImage, userName }: Props) {
   const [image, setImage] = useState<string | null>(userImage ?? null)
 
-  const {setError, setLoading, loading, error} = useUIStore()
+  const { setError, setLoading, loading, error } = useUIStore()
 
   useEffect(() => {
     if (userImage) setImage(userImage)

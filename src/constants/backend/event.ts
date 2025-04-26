@@ -14,15 +14,14 @@ export const EVENT = {
     DESCRIPTION: 'description',
     DATE: 'date',
     PRICE: 'price',
-    MESSAGE: 'are required fields'
+    MESSAGE: 'are required fields',
   },
   ERRORS: {
     TITLE_TOO_LONG: 'Title must be 100 characters or less',
     DESCRIPTION_TOO_LONG: 'Description must be 300 characters or less',
-    TOO_CHEAP: 'Event can\'t be worth 0 dollars',
+    TOO_CHEAP: "Event can't be worth 0 dollars",
     INVALID_DATE: 'Invalid date format',
     PAST_DATE: 'Event can\t be in the past',
-    DATE_TOO_FAR: 'Event can\t be in more than 2 years'
-
-  }
+    DATE_TOO_FAR: 'Event can\t be in more than 2 years',
+  },
 }

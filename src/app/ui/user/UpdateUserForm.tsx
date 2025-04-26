@@ -71,7 +71,6 @@ export default function UpdateUserForm({ user }: { user: User }) {
             aria_label={UPDATE_USER_FORM.LABELS.NEW_PASSWORD}
             required={false}
             name={UPDATE_USER_FORM.INPUT_NAMES.NEW_PASSWORD}
-
           />
 
           <ProfilePicture userImage={user.image} userName={user.name} />

@@ -29,8 +29,8 @@ export default function AuthButton({
       aria-label={text}
     >
       <span>{<Logo />}</span>
-      <span className='hidden xs:inline'>{text}</span>
-      <span className='inline xs:hidden'>{AUTH_BUTTON.ALTERNATIVE_TEXT}</span>
+      <span className="hidden xs:inline">{text}</span>
+      <span className="inline xs:hidden">{AUTH_BUTTON.ALTERNATIVE_TEXT}</span>
     </button>
   )
 }

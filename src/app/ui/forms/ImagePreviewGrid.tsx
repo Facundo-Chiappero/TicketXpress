@@ -3,7 +3,7 @@
 import { IMAGE_PREVIEW_GRID } from '@/constants/frontend/imagePreviewGrid'
 
 interface Props {
-  images: string[] 
+  images: string[]
   onRemove: (index: number) => void
 }
 

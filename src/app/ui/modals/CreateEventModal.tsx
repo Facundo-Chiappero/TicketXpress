@@ -22,7 +22,7 @@ export default function CreateEventModal({ userId, onClose }: Props) {
   const [images, setImages] = useState<string[]>([])
   const { execute } = useModalAction({ onSuccess: onClose })
 
-  const {loading} = useUIStore()
+  const { loading } = useUIStore()
 
   useEscapeKey(onClose)
 

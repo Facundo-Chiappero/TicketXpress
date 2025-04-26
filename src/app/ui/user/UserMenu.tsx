@@ -11,11 +11,14 @@ import { useClickOutside } from '@/hooks/useClickOutside'
 
 export default function UserMenu({ user }: { user: CurrentUser }) {
   const detailsRef = useRef<HTMLDetailsElement>(null)
- 
 
-  useClickOutside(detailsRef, () => {
-    detailsRef.current?.removeAttribute('open')
-  }, USER_MENU_ACTIONS.MOUSE_EVENT)
+  useClickOutside(
+    detailsRef,
+    () => {
+      detailsRef.current?.removeAttribute('open')
+    },
+    USER_MENU_ACTIONS.MOUSE_EVENT
+  )
 
   return (
     <details ref={detailsRef} className="relative group flex flex-col gap-2">

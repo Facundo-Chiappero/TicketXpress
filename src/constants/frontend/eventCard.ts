@@ -10,5 +10,6 @@ export const EVENT_CARD = {
     MONTH: 'long' as const,
     DAY: 'numeric' as const,
   },
-  DISCLAIMER: '⚠️ Important: This is a fake event created for educational purposes only. However, the payment is real — we are not responsible for any unintended transactions.'
+  DISCLAIMER:
+    '⚠️ Important: This is a fake event created for educational purposes only. However, the payment is real — we are not responsible for any unintended transactions.',
 }

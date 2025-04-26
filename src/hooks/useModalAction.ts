@@ -18,8 +18,8 @@ export default function useModalAction({ onSuccess }: Props) {
     body?: T
   ) => {
     setLoading(true)
-    
-    try { 
+
+    try {
       const res = await fetch(url, {
         ...options,
         headers: {
