@@ -4,7 +4,6 @@ import { getAllEvents } from '@/lib/events'
 import EventCard from './ui/Events/EventCard'
 import Header from './ui/Header'
 import { HOME_PAGE_TEXTS } from '@/constants/frontend/home'
-import { Spinner } from './ui/icons/Spinner'
 
 //todo revisar lo del email, si ya se configuro
 export default async function HomePage() {
@@ -15,7 +14,6 @@ export default async function HomePage() {
     <>
       <Header user={session?.user} title="Events" />
 
-<Spinner />
       <main className="min-h-screen w-full flex justify-center items-center gap-4 flex-col my-4">
         {events.length > 0 ? (
           events.map((event) => (
