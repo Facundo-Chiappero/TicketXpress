@@ -1,13 +1,11 @@
-// src/app/api/auth/[...nextauth]/route.ts
-import NextAuth from 'next-auth'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { prisma } from '@/lib/prisma'
-import { providers } from '@/lib/auth/providers'
-import { callbacks } from '@/lib/auth/callbacks'
-import { PAGES } from '@/constants/frontend/pages'
-import { NextApiRequest, NextApiResponse } from 'next'
+import NextAuth, { AuthOptions } from "next-auth"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import { prisma } from "@/lib/prisma"
+import { providers } from "@/lib/auth/providers"
+import { callbacks } from "@/lib/auth/callbacks"
+import { PAGES } from "@/constants/frontend/pages"
 
-export const GET = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, {
+export const authOptions: AuthOptions = {
   providers,
   callbacks,
   adapter: PrismaAdapter(prisma),
@@ -15,18 +13,10 @@ export const GET = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, 
     signIn: PAGES.AUTH.LOGIN,
   },
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
   },
-})
+}
 
-export const POST = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, {
-  providers,
-  callbacks,
-  adapter: PrismaAdapter(prisma),
-  pages: {
-    signIn: PAGES.AUTH.LOGIN,
-  },
-  session: {
-    strategy: 'jwt',
-  },
-})
+const handler = NextAuth(authOptions)
+
+export { handler as GET, handler as POST }
