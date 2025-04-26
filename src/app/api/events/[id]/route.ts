@@ -42,7 +42,6 @@ export async function PATCH(
     return NextResponse.json(updatedEvent)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.error('Error actualizando evento:', error)
     return NextResponse.json(
       { error: ERRORS.EVENT_BY_ID.UPDATING },
       { status: 500 }
