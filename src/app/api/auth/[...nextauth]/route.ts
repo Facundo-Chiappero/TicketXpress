@@ -1,22 +1,8 @@
-import NextAuth, { AuthOptions } from "next-auth"
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { prisma } from "@/lib/prisma"
-import { providers } from "@/lib/auth/providers"
-import { callbacks } from "@/lib/auth/callbacks"
-import { PAGES } from "@/constants/frontend/pages"
+import NextAuth from "next-auth"
+import { authOptions } from "@/lib/auth/authOptions"
 
-export const authOptions: AuthOptions = {
-  providers,
-  callbacks,
-  adapter: PrismaAdapter(prisma),
-  pages: {
-    signIn: PAGES.AUTH.LOGIN,
-  },
-  session: {
-    strategy: "jwt",
-  },
-}
-
+// Create NextAuth handler
 const handler = NextAuth(authOptions)
 
+// Export GET and POST handlers for App Router
 export { handler as GET, handler as POST }

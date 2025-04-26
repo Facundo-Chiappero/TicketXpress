@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth'
-import { authOptions } from './api/auth/[...nextauth]/route'
+import { authOptions } from '@/lib/auth/authOptions'
 import { getAllEvents } from '@/lib/events'
 import EventCard from './ui/Events/EventCard'
 import Header from './ui/Header'

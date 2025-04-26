@@ -1,4 +1,4 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authOptions } from '@/lib/auth/authOptions'
 import { PAGES } from '@/constants/frontend/pages'
 import { PARAMS } from '@/constants/frontend/params'
 import { getServerSession } from 'next-auth'

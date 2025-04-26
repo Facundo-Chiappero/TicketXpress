@@ -1,6 +1,6 @@
 import Header from '@/app/ui/Header'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '../api/auth/[...nextauth]/route'
+import { authOptions } from '@/lib/auth/authOptions'
 import { Metadata } from 'next'
 import { METADATA } from '@/constants/frontend/metadata'
 
