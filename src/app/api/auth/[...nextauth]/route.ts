@@ -5,8 +5,9 @@ import { prisma } from '@/lib/prisma'
 import { providers } from '@/lib/auth/providers'
 import { callbacks } from '@/lib/auth/callbacks'
 import { PAGES } from '@/constants/frontend/pages'
+import { NextApiRequest, NextApiResponse } from 'next'
 
-export const GET = (req, res) => NextAuth(req, res, {
+export const GET = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, {
   providers,
   callbacks,
   adapter: PrismaAdapter(prisma),
@@ -18,7 +19,7 @@ export const GET = (req, res) => NextAuth(req, res, {
   },
 })
 
-export const POST = (req, res) => NextAuth(req, res, {
+export const POST = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, {
   providers,
   callbacks,
   adapter: PrismaAdapter(prisma),
