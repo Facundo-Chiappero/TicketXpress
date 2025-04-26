@@ -7,7 +7,7 @@ import useModalAction from '@/hooks/useModalAction'
 import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 import { UPDATE_EVENT_MODAL } from '@/constants/frontend/modals'
 import { useUIStore } from '@/stores/useUIStore'
-import { useEventFormStore } from '@/stores/useEventFormStore'
+import { useEffect, useState } from 'react'
 
 interface Props {
   event: {
@@ -22,22 +22,24 @@ interface Props {
 }
 
 export default function EditEventModal({ event, onClose }: Props) {
-  const {
-    title,
-    description,
-    images,
-    price,
-    date,
-    setTitle,
-    setDescription,
-    setImages,
-    setPrice,
-    setDate,
-  } = useEventFormStore()
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState(0)
+  const [date, setDate] = useState('')
+  const [images, setImages] = useState<string[]>([])
   const { execute } = useModalAction({ onSuccess: onClose })
-  const { loading } = useUIStore()
+  
+    const {loading} = useUIStore()
 
   useEscapeKey(onClose)
+
+  useEffect(() => {
+    setTitle(event.title)
+    setDescription(event.description)
+    setPrice(event.price)
+    setDate(new Date(event.date).toISOString().slice(0, 16))
+    setImages(event.images || [])
+  }, [event])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -59,7 +61,7 @@ export default function EditEventModal({ event, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
+      className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
       role={UPDATE_EVENT_MODAL.ARIA.ROLE}
       aria-modal="true"
       aria-labelledby={UPDATE_EVENT_MODAL.ARIA.LABELLED_BY}

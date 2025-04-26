@@ -6,6 +6,6 @@ export const UPDATE_IMAGE = {
     UNEXPECTED: 'Unexpected error happened',
     BIG_FILE: 'Image is too big. Max size: ',
     MISMATCH_EXTENSION_AND_BYTES:
-      "The uploaded file's content doesn't match its file extension.",
+      "The uploaded file's content doesn't match its file extension",
   },
 }

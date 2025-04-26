@@ -1,5 +1,5 @@
 import { CREATE_PASSWORD } from './createPassword'
-import { EVENT_BY_ID } from './eventById'
+import { EVENT, EVENT_BY_ID } from './event'
 import { PAYMENT } from './payment'
 import { SIGNUP } from './signup'
 import { UPDATE_IMAGE } from './updateImage'
@@ -10,8 +10,9 @@ export const ERRORS = {
   PAYMENT: PAYMENT.ERRORS,
   SIGNUP: SIGNUP.ERRORS,
   EVENT_BY_ID: EVENT_BY_ID.ERRORS,
+  EVENT: EVENT.ERRORS,
   UPDATE_PROFILE: UPDATE_PROFILE.ERRORS,
-  MISSING_EMAIL_OR_NAME: 'Google account must have an email and a name.',
+  MISSING_EMAIL_OR_NAME: 'Google account must have an email and a name',
   UPDATE_IMAGE: UPDATE_IMAGE.ERRORS,
   CREATE_PASSWORD: CREATE_PASSWORD.ERRORS,
   VERIFY_CAPTCHA: VERIFY_CAPTCHA.ERRORS,

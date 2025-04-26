@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { Event } from '@/types'
 
 type UIState = {
   // general state
@@ -20,7 +21,10 @@ type UIState = {
   newPassword: string
 
   // reCaptcha
-  recaptchaToken: string | null //todo mover esto y crear otro para los elementos del form para crear y editar eventos
+  recaptchaToken: string | null
+
+  // events
+  eventBeingEdited: Event | null
 
   // actions
   setLoading: (v: boolean) => void
@@ -40,6 +44,9 @@ type UIState = {
   setNewPassword: (val: string) => void
 
   setRecaptchaToken: (val: string | null) => void
+
+  setEventBeingEdited: (event: Event | null) => void
+
 
   resetUI: () => void
 }
@@ -62,6 +69,8 @@ export const useUIStore = create<UIState>((set) => ({
 
   recaptchaToken: null,
 
+  eventBeingEdited: null,
+
   setLoading: (v) => set({ loading: v }),
   setError: (msg) => set({ error: msg }),
   setSuccess: (v) => set({ success: v }),
@@ -82,6 +91,8 @@ export const useUIStore = create<UIState>((set) => ({
   setNewPassword: (val) => set({ newPassword: val }),
 
   setRecaptchaToken: (val) => set({ recaptchaToken: val }),
+
+  setEventBeingEdited: (event) => set({ eventBeingEdited: event }),
 
   resetUI: () =>
     set({

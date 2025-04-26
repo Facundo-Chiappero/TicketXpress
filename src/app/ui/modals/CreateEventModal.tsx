@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { Spinner } from '../icons/Spinner'
 import EventFormFields from '../forms/EventFormFields'
 import useEscapeKey from '@/hooks/useEscapeKey'
@@ -7,7 +8,6 @@ import useModalAction from '@/hooks/useModalAction'
 import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 import { CREATE_EVENT_MODAL } from '@/constants/frontend/modals'
 import { useUIStore } from '@/stores/useUIStore'
-import { useEventFormStore } from '@/stores/useEventFormStore'
 
 interface Props {
   userId: string
@@ -15,20 +15,14 @@ interface Props {
 }
 
 export default function CreateEventModal({ userId, onClose }: Props) {
-  const {
-    title,
-    description,
-    images,
-    price,
-    date,
-    setTitle,
-    setDescription,
-    setImages,
-    setPrice,
-    setDate,
-  } = useEventFormStore()
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState(0)
+  const [date, setDate] = useState('')
+  const [images, setImages] = useState<string[]>([])
   const { execute } = useModalAction({ onSuccess: onClose })
-  const { loading } = useUIStore()
+
+  const {loading} = useUIStore()
 
   useEscapeKey(onClose)
 
@@ -49,7 +43,7 @@ export default function CreateEventModal({ userId, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
+      className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
       role="dialog"
       aria-labelledby={CREATE_EVENT_MODAL.ARIA_LABELLED_BY}
       aria-describedby={CREATE_EVENT_MODAL.ARIA_DESCRIBED_BY}

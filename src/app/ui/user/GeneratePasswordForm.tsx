@@ -12,6 +12,7 @@ import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 import { GENERATE_PASSWORD_FORM } from '@/constants/frontend/generatePassword'
 import { PAGES } from '@/constants/frontend/pages'
 import { useUIStore } from '@/stores/useUIStore'
+import { ToastContainer } from 'react-toastify'
 
 export default function GeneratePasswordForm({ user }: { user: User }) {
   const {
@@ -134,6 +135,13 @@ export default function GeneratePasswordForm({ user }: { user: User }) {
       </AuthFormWrapper>
 
       {updated && <RefreshSession updated={updated} />}
+
+      <ToastContainer
+        position="bottom-right"
+        closeOnClick={true}
+        newestOnTop={true}
+        theme="colored"
+      />
     </>
   )
 }

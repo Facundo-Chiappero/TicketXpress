@@ -2,14 +2,14 @@
 
 import UserImage from '@/app/ui/user/UserImage'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import ErrorMessage from '../forms/ErrorMessage'
 import { UPDATE_USER_FORM } from '@/constants/frontend/updateUserForm'
 import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 import { ERRORS } from '@/constants/frontend/errors'
 import { PROFILE_PICTURE } from '@/constants/frontend/profilePicture'
 import { useUIStore } from '@/stores/useUIStore'
-import { useEventFormStore } from '@/stores/useEventFormStore'
+import { ToastContainer } from 'react-toastify'
 
 interface Props {
   userImage: string | undefined
@@ -17,8 +17,9 @@ interface Props {
 }
 
 export default function ProfilePicture({ userImage, userName }: Props) {
-  const { image, setImage } = useEventFormStore()
-  const { loading, error, setLoading, setError } = useUIStore()
+  const [image, setImage] = useState<string | null>(userImage ?? null)
+
+  const {setError, setLoading, loading, error} = useUIStore()
 
   useEffect(() => {
     if (userImage) setImage(userImage)
@@ -102,6 +103,13 @@ export default function ProfilePicture({ userImage, userName }: Props) {
       )}
 
       {error && <ErrorMessage error={error} />}
+
+      <ToastContainer
+        position="bottom-right"
+        closeOnClick={true}
+        newestOnTop={true}
+        theme="colored"
+      />
     </>
   )
 }

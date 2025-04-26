@@ -5,7 +5,7 @@ import { SIGN_UP_FORM } from './signupForm'
 import { UPDATE_USER_FORM } from './updateUserForm'
 
 export const ERRORS = {
-  SERVER_ERROR: 'A server error occurred.',
+  SERVER_ERROR: 'A server error occurred',
   SIGN_UP_FORM: SIGN_UP_FORM.ERRORS,
   LOGIN_FORM: LOGIN_FORM.ERRORS,
   UPDATE_USER: UPDATE_USER_FORM.ERRORS,

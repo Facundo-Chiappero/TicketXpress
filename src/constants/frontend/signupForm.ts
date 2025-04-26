@@ -23,10 +23,10 @@ export const SIGN_UP_FORM = {
   },
   ERRORS: {
     REQUIRED_FIELDS: 'All fields are required',
-    GENERAL: 'An error occurred while creating your account.',
-    SUCCESS: 'Account created successfully.',
-    REDIRECT_SUCCESS: 'Account created. You will be redirected shortly.',
+    GENERAL: 'An error occurred while creating your account',
+    SUCCESS: 'Account created successfully',
+    REDIRECT_SUCCESS: 'Account created. You will be redirected shortly',
     LOGIN_FAILED_AFTER_SIGNUP:
-      'Account created, but automatic login failed. Please log in manually.',
+      'Account created, but automatic login failed. Please log in manually',
   },
 }

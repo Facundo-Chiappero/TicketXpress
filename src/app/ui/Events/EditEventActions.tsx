@@ -29,13 +29,16 @@ const DeleteEventModal = dynamic(
 )
 
 export default function EditEventActions({ event }: { event: Event }) {
-  const { isDeleting, isEditing, setIsDeleting, setIsEditing } = useUIStore()
+  const { isDeleting, isEditing, eventBeingEdited, setIsDeleting, setIsEditing, setEventBeingEdited } = useUIStore()
 
   return (
     <>
       <div className="flex items-center gap-2">
         <IconButton
-          onClick={() => setIsEditing(true)}
+          onClick={() => {
+            setEventBeingEdited(event)
+            setIsEditing(true)
+          }}
           className="text-blue-500 hover:text-blue-700"
           icon={<Clipboard />}
           title={EDIT_EVENT_ACTIONS.TITLES.EDIT_EVENT}
@@ -52,19 +55,22 @@ export default function EditEventActions({ event }: { event: Event }) {
         />
       </div>
 
-      {isEditing && (
-        <EditEventModal
-          event={event}
-          onClose={() => setIsEditing(false)}
-          aria-labelledby={EDIT_EVENT_ACTIONS.MODAL_LABELS.EDIT_EVENT_TITLE}
-          aria-describedby={
-            EDIT_EVENT_ACTIONS.MODAL_LABELS.EDIT_EVENT_DESCRIPTION
-          }
-        />
-      )}
+      {isEditing && eventBeingEdited?.id === event.id && (
+  <EditEventModal
+    event={eventBeingEdited}
+    onClose={() => {
+      setIsEditing(false)
+      setEventBeingEdited(null)
+    }}
+    aria-labelledby={EDIT_EVENT_ACTIONS.MODAL_LABELS.EDIT_EVENT_TITLE}
+    aria-describedby={EDIT_EVENT_ACTIONS.MODAL_LABELS.EDIT_EVENT_DESCRIPTION}
+  />
+)}
+
 
       {isDeleting && (
         <DeleteEventModal
+          key={event.id}
           event={event.id}
           onClose={() => setIsDeleting(false)}
           aria-labelledby={EDIT_EVENT_ACTIONS.MODAL_LABELS.DELETE_EVENT_TITLE}

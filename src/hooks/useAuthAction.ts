@@ -30,7 +30,7 @@ export default function useAuthAction(isSignUp: boolean = false) {
 
     let name = formData.get('name') as string
     if (name) name = name.trim()
-    const email = (formData.get('email') as string).trim()
+    const email = (formData.get('email') as string).trim().toLowerCase()
     const password = (formData.get('password') as string).trim()
 
     try {

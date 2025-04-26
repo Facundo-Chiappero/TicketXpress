@@ -7,6 +7,7 @@ import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 import { ERRORS } from '@/constants/frontend/errors'
 import { PROFILE_PICTURE } from '@/constants/frontend/profilePicture'
 import { useUIStore } from '@/stores/useUIStore'
+import { ToastContainer } from 'react-toastify'
 
 interface Props {
   title: string
@@ -137,6 +138,13 @@ export default function EventFormFields({
           {submitLabel}
         </button>
       </div>
+
+      <ToastContainer
+        position="bottom-right"
+        closeOnClick={true}
+        newestOnTop={true}
+        theme="colored"
+      />
     </>
   )
 }

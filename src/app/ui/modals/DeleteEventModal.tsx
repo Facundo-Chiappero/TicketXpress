@@ -5,6 +5,7 @@ import useEscapeKey from '@/hooks/useEscapeKey'
 import { Spinner } from '../icons/Spinner'
 import { API_ENDPOINTS, HTTP_METHODS } from '@/constants/frontend/endpoints'
 import { DELETE_EVENT_MODAL } from '@/constants/frontend/modals'
+import { useUIStore } from '@/stores/useUIStore'
 
 interface Props {
   event: number
@@ -12,8 +13,10 @@ interface Props {
 }
 
 export default function DeleteEventModal({ event, onClose }: Props) {
-  const { execute, loading } = useModalAction({ onSuccess: onClose })
+  const { execute } = useModalAction({ onSuccess: onClose })
   useEscapeKey(onClose)
+
+  const {loading} = useUIStore()
 
   const handleConfirm = () => {
     execute(`${API_ENDPOINTS.EVENTS}/${event}`, {
@@ -23,7 +26,7 @@ export default function DeleteEventModal({ event, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/25"
       role={DELETE_EVENT_MODAL.ARIA.ROLE}
       aria-modal="true"
       aria-labelledby={DELETE_EVENT_MODAL.ARIA.LABELLED_BY}

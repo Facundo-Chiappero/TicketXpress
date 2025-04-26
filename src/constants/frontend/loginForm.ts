@@ -20,10 +20,10 @@ export const LOGIN_FORM = {
     },
   },
   ERRORS: {
-    GENERAL: 'There was an error logging in.',
-    GOOGLE_ERROR: 'There was an error with Google authentication.',
-    SUCCESS: 'Login successful.',
-    CREDENTIALS_ERROR: 'Incorrect credentials. Please try again.',
+    GENERAL: 'There was an error logging in',
+    GOOGLE_ERROR: 'There was an error with Google authentication',
+    SUCCESS: 'Login successful',
+    CREDENTIALS_ERROR: 'Incorrect credentials. Please try again',
     REDIRECT_SUCCESS: 'Login successful. Redirecting shortly...',
   },
 }
