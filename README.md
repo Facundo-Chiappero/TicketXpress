@@ -47,8 +47,8 @@ Este es un proyecto de **venta de entradas para eventos** desarrollado con **Nex
 Clona el repositorio y entra al proyecto:
 
 ```bash
-git clone https://github.com/Facundo-Chiappero/events-manager.git
-cd events-manager
+git clone https://github.com/Facundo-Chiappero/TicketXpress.git
+cd TicketXpress
 npm install
 ```
 
@@ -155,8 +155,8 @@ This is a **ticket-selling platform for events** built with **Next.js**. It allo
 Clone the repository and navigate to the project:
 
 ```bash
-git clone https://github.com/Facundo-Chiappero/events-manager.git
-cd events-manager
+git clone https://github.com/Facundo-Chiappero/TicketXpress.git
+cd TicketXpress
 npm install
 ```
 
