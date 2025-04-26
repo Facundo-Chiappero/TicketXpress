@@ -11,6 +11,7 @@ type Props = {
   name?: string
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   aria_label?: string
+  required?: boolean
 }
 export default function PasswordInput({
   label,
@@ -20,13 +21,14 @@ export default function PasswordInput({
   onChange,
   name,
   aria_label,
+  required = true
 }: Props) {
   return (
     <div className="relative flex-col flex gap-y-4">
       <AuthInput
         name={name ? name : 'password'}
         type={passwordVisible ? 'text' : 'password'}
-        required
+        required={required}
         label={label}
         autoComplete="current-password"
         placeholder={placeholder}

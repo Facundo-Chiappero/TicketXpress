@@ -58,16 +58,20 @@ export default function UpdateUserForm({ user }: { user: User }) {
             label={UPDATE_USER_FORM.LABELS.CURRENT_PASSWORD}
             placeholder={UPDATE_USER_FORM.PLACEHOLDERS.CURRENT_PASSWORD}
             passwordVisible={currentPasswordVisible}
-            updateVisibility={toggleNewPasswordVisible}
+            updateVisibility={toggleCurrentPasswordVisible}
             aria_label={UPDATE_USER_FORM.LABELS.CURRENT_PASSWORD}
+            name={UPDATE_USER_FORM.INPUT_NAMES.CURRENT_PASSWORD}
           />
 
           <PasswordInput
             label={UPDATE_USER_FORM.LABELS.NEW_PASSWORD}
             placeholder={UPDATE_USER_FORM.PLACEHOLDERS.NEW_PASSWORD}
             passwordVisible={newPasswordVisible}
-            updateVisibility={toggleCurrentPasswordVisible}
+            updateVisibility={toggleNewPasswordVisible}
             aria_label={UPDATE_USER_FORM.LABELS.NEW_PASSWORD}
+            required={false}
+            name={UPDATE_USER_FORM.INPUT_NAMES.NEW_PASSWORD}
+
           />
 
           <ProfilePicture userImage={user.image} userName={user.name} />

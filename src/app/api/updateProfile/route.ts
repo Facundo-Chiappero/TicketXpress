@@ -34,11 +34,19 @@ export async function PATCH(req: Request) {
   ) as string
   const image = body.get(UPDATE_USER_FORM.INPUT_NAMES.IMAGE) as string
 
+  console.log(name);
+  console.log(email);
+  console.log(currentPassword);
+  console.log(newPassword);
+  console.log(image);
+
   const user = await prisma.user.findUnique({
     where: {
       id: Number(session.user.id),
     },
   })
+
+  console.log(user?.password);
 
   if (!user) {
     return NextResponse.json(
@@ -54,6 +62,7 @@ export async function PATCH(req: Request) {
     )
   }
 
+  
   const passwordMatches = await bcrypt.compare(currentPassword, user.password)
 
   if (!passwordMatches) {

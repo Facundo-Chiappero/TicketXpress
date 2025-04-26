@@ -100,19 +100,19 @@ export default function GeneratePasswordForm({ user }: { user: User }) {
           <PasswordInput
             updateVisibility={toggleNewPasswordVisible}
             label={GENERATE_PASSWORD_FORM.NEW_PASSWORD.LABEL}
-            passwordVisible={currentPasswordVisible}
+            passwordVisible={newPasswordVisible}
             placeholder={GENERATE_PASSWORD_FORM.PLACEHOLDER}
             name={GENERATE_PASSWORD_FORM.NEW_PASSWORD.NAME}
-            onChange={(e) => setCurrentPassword(e.target.value)}
+            onChange={(e) => setNewPassword(e.target.value)}
           />
 
           <PasswordInput
             updateVisibility={toggleCurrentPasswordVisible}
             label={GENERATE_PASSWORD_FORM.CONFIRM_PASSWORD.LABEL}
-            passwordVisible={newPasswordVisible}
+            passwordVisible={currentPasswordVisible}
             placeholder={GENERATE_PASSWORD_FORM.PLACEHOLDER}
             name={GENERATE_PASSWORD_FORM.CONFIRM_PASSWORD.NAME}
-            onChange={(e) => setNewPassword(e.target.value)}
+            onChange={(e) => setCurrentPassword(e.target.value)}
           />
 
           {error && <ErrorMessage error={error} />}

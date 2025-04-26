@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import { MercadoPagoConfig, Preference } from 'mercadopago'
-import { ERRORS } from '@/constants/backend/errors'
 import { PAYMENT_MESSAGES } from '@/constants/backend/paymentMessages'
 import { PAYMENT } from '@/constants/backend/payment'
 
