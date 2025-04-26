@@ -60,7 +60,7 @@ export default function DeleteEventModal({ event, onClose }: Props) {
             <div className="flex justify-end gap-2">
               <button
                 onClick={onClose}
-                className="px-4 py-1 rounded bg-gray-50 dark:bg-zinc-700 text-black dark:text-white hover:bg-gray-400 dark:hover:bg-zinc-600 transition"
+                className="px-4 py-1 rounded bg-gray-200 dark:bg-zinc-700 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-zinc-600 transition"
                 aria-label={DELETE_EVENT_MODAL.ARIA.CANCEL_LABEL}
               >
                 {DELETE_EVENT_MODAL.CANCEL}

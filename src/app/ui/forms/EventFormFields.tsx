@@ -76,7 +76,7 @@ export default function EventFormFields({
   return (
     <>
       <input
-        className="w-full p-2 rounded bg-zinc-100 dark:bg-zinc-800"
+        className="w-full p-2 rounded bg-zinc-200 dark:bg-zinc-800"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder={EVENT_FORM_FIELDS.PLACEHOLDERS.TITLE}
@@ -84,14 +84,14 @@ export default function EventFormFields({
       />
 
       <textarea
-        className="w-full p-2 rounded bg-zinc-100 dark:bg-zinc-800 resize-none"
+        className="w-full p-2 rounded bg-zinc-200 dark:bg-zinc-800 resize-none"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder={EVENT_FORM_FIELDS.PLACEHOLDERS.DESCRIPTION}
       />
 
       <input
-        className="w-full p-2 rounded bg-zinc-100 dark:bg-zinc-800"
+        className="w-full p-2 rounded bg-zinc-200 dark:bg-zinc-800"
         type="number"
         value={price}
         onChange={(e) => setPrice(parseFloat(e.target.value))}
@@ -99,7 +99,7 @@ export default function EventFormFields({
       />
 
       <input
-        className="w-full p-2 rounded bg-zinc-100 dark:bg-zinc-800"
+        className="w-full p-2 rounded bg-zinc-200 dark:bg-zinc-800"
         type="datetime-local"
         value={date}
         onChange={(e) => setDate(e.target.value)}
@@ -109,7 +109,7 @@ export default function EventFormFields({
         type="file"
         accept="image/*"
         multiple
-        className="w-full p-2 bg-zinc-100 dark:bg-zinc-800 rounded"
+        className="w-full p-2 bg-zinc-200 dark:bg-zinc-800 rounded"
         onChange={handleImageUpload}
         aria-describedby={PROFILE_PICTURE.ARIA_DESCRIBED_BY}
       />
@@ -125,14 +125,14 @@ export default function EventFormFields({
         <button
           type="button"
           onClick={onClose}
-          className="px-4 py-1 bg-gray-50 dark:bg-zinc-700 rounded"
+          className="px-4 py-1 bg-gray-200 hover:bg-gray-300 dark:bg-zinc-700 dark:hover:bg-zinc-600 rounded"
           aria-label={EVENT_FORM_FIELDS.BUTTONS.CANCEL}
         >
           {EVENT_FORM_FIELDS.BUTTONS.CANCEL}
         </button>
         <button
           type="submit"
-          className="px-4 py-1 bg-blue-500 text-white rounded"
+          className="px-4 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded"
           aria-label={submitLabel}
         >
           {submitLabel}

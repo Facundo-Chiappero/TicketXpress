@@ -16,7 +16,7 @@ export function emailBody({ amount, name }: { amount: number; name: string }) {
       </div>
 
       <p style="font-size: 14px; color: #666;">
-        🧪 This is a 100% test project, created for educational purposes to learn Next.js and modern web development tools.
+        This is a 100% test project, created for educational purposes to learn Next.js and modern web development tools.
       </p>
     </div>
   `

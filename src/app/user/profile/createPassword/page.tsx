@@ -21,7 +21,7 @@ export default async function GeneratePasswordPage() {
           </h3>
           <Link
             href={PAGES.USER.PROFILE}
-            className="flex items-center justify-center rounded-full px-3 py-1 font-semibold w-fit bg-gray-50 text-gray-900 border-white/15 border-2 self-center hover:bg-gray-200"
+            className="flex items-center justify-center rounded-full px-3 py-1 font-semibold w-fit bg-gray-50 text-gray-900 border-2 self-center hover:bg-gray-200"
           >
             {GENERATE_PASSWORD_PAGE.HAS_PASSWORD.BUTTON}
           </Link>

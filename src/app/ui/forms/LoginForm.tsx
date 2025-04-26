@@ -91,7 +91,7 @@ export default function LoginForm() {
         <button
           type="submit"
           disabled={loading}
-          className="mt-2 flex items-center justify-center rounded-full px-4 py-2 font-semibold bg-[#242424] text-white border-white/15 border-2 self-center hover:bg-[#2f2f2f]"
+          className="mt-2 flex items-center justify-center rounded-full px-4 py-2 font-semibold bg-zinc-800 text-white border-white/15 border-2 self-center hover:bg-zinc-900"
         >
           {LOGIN_FORM.BUTTONS.SUBMIT}
         </button>

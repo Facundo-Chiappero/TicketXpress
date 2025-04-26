@@ -7,7 +7,7 @@ import GoHomeButton from '@/app/ui/buttons/GoHomeButton'
 export default function AuthButtons({ user }: { user: CurrentUser }) {
   if (!user) {
     return (
-      <nav className="flex gap-4 flex-wrap w-full">
+      <nav className="flex gap-4 flex-wrap xs:w-fit w-full">
         <LoginButton />
         <SignupButton />
       </nav>

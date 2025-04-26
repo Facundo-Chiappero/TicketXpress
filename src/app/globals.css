@@ -47,25 +47,34 @@ button, a{
     content: '';
     position: absolute;
     left: 50%;
+    top: -5px;
     transform: translateX(-50%);
     width: 0;
     height: 0;
     border-left: 17px solid transparent;
     border-right: 17px solid transparent;
-    border-bottom: 34px solid rgb(63 63 70); /* border */
+    border-bottom: 34px solid rgb(209 213 219); /* border */
   }
 
   .triangle-with-border::after {
     content: '';
     position: absolute;
     left: 50%;
-    top: 2px;
+    top: -3px;
     transform: translateX(-50%);
     width: 0;
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 20px solid rgb(39 39 42); /* triangle */
+    border-bottom: 20px solid white; /* triangle */
+  }
+
+  .dark .triangle-with-border::before {
+    border-bottom-color: rgb(63 63 70);
+  }
+
+  .dark .triangle-with-border::after {
+    border-bottom-color: rgb(39 39 42);
   }
 }
 
@@ -74,7 +83,7 @@ p {
 }
 
 .pfp {
-  @apply min-w-10 w-10 h-10 rounded-full object-cover border-2;
+  @apply min-w-10 w-10 h-10 rounded-full object-cover border-2 border-black/15;
 }
 
 /* mecado pago button */
@@ -82,8 +91,23 @@ div .svelte-1swmi9x {
   margin: 1rem 0 0 0 !important;
 }
 
-/* //TODO TRY TO PASS THIS TO TW - loading Spinner */
-.lds-spinner,
+/* loading spinner (Spinner) */
+@layer utilities {
+  @keyframes spinner {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .animate-spinner {
+    animation: spinner 1.2s linear infinite;
+    transform-origin: 40px 40px;
+  }
+}
+/* .lds-spinner,
 .lds-spinner div,
 .lds-spinner div:after {
   box-sizing: border-box;
@@ -165,4 +189,4 @@ div .svelte-1swmi9x {
   100% {
     opacity: 0;
   }
-}
+} */
