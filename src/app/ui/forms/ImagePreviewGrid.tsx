@@ -1,7 +1,6 @@
 'use client'
 
 import { IMAGE_PREVIEW_GRID } from '@/constants/frontend/imagePreviewGrid'
-import Image from 'next/image'
 
 interface Props {
   images: string[]
@@ -19,7 +18,7 @@ export default function ImagePreviewGrid({ images, onRemove }: Props) {
     <div className="grid grid-cols-2 gap-2 mt-2">
       {images.map((img, i) => (
         <div key={i} className="relative group">
-          <Image
+          <img
             src={img}
             alt={IMAGE_PREVIEW_GRID.IMAGE_ALT(i)}
             className="h-24 w-full object-cover rounded"

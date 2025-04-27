@@ -10,7 +10,6 @@ import { ERRORS } from '@/constants/frontend/errors'
 import { PROFILE_PICTURE } from '@/constants/frontend/profilePicture'
 import { useUIStore } from '@/stores/useUIStore'
 import { ToastContainer } from 'react-toastify'
-import Image from 'next/image'
 
 interface Props {
   userImage: string | undefined
@@ -84,7 +83,7 @@ export default function ProfilePicture({ userImage, userName }: Props) {
 
       {image ? (
         <div className="mt-4">
-          <Image
+          <img
             src={image}
             alt="Preview"
             className="text-white focus:outline-none pfp"

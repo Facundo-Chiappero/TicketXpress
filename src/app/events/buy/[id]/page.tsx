@@ -6,7 +6,6 @@ import { notFound } from 'next/navigation'
 import { PAGES } from '@/constants/frontend/pages'
 import { METADATA } from '@/constants/frontend/metadata'
 import { EVENT_CARD } from '@/constants/frontend/eventCard'
-import Image from 'next/image'
 
 interface Props {
   params: {
@@ -44,7 +43,7 @@ export default async function BuyEventPage({ params }: Props) {
 
         <div className="flex flex-wrap gap-4">
           {event.images.map((url: string, idx: number) => (
-            <Image
+            <img
               key={idx}
               src={url}
               alt={EVENT_CARD.IMAGE_ALT(idx, event.title)}
