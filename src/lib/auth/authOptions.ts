@@ -1,9 +1,9 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { prisma } from "@/lib/prisma"
-import { providers } from "@/lib/auth/providers"
-import { callbacks } from "@/lib/auth/callbacks"
-import { PAGES } from "@/constants/frontend/pages"
-import type { NextAuthOptions } from "next-auth"
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import { prisma } from '@/lib/prisma'
+import { providers } from '@/lib/auth/providers'
+import { callbacks } from '@/lib/auth/callbacks'
+import { PAGES } from '@/constants/frontend/pages'
+import type { NextAuthOptions } from 'next-auth'
 
 export const authOptions: NextAuthOptions = {
   providers,
@@ -13,6 +13,6 @@ export const authOptions: NextAuthOptions = {
     signIn: PAGES.AUTH.LOGIN,
   },
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
 }

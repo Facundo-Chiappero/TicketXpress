@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: METADATA.LAYOUTS.HOME.DESCRIPTION,
   icons: {
     icon: '/favicon.png',
-  }
+  },
 }
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <Providers>{children}</Providers>
       </body>

@@ -10,7 +10,7 @@ export default function Header({
   title: string
 }) {
   return (
-    <header className="flex justify-end xs:justify-between sticky top-0 left-0 bg-inherit p-4 flex-wrap flex-row-reverse gap-4 items-center z-50">
+    <header className="flex justify-end xs:justify-between sticky top-0 left-0 bg-inherit p-4 flex-wrap flex-row-reverse gap-4 items-center z-50 shadow-md">
       <AuthButtons user={user} />
 
       <CreateEventButton user={user} />

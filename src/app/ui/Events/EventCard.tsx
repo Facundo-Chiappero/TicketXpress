@@ -4,6 +4,7 @@ import Link from 'next/link'
 import EditEventActions from './EditEventActions'
 import { CurrentUser, ExtendedEvent, ROLES } from '@/types'
 import { EVENT_CARD } from '@/constants/frontend/eventCard'
+import Image from 'next/image'
 
 interface Props {
   event: ExtendedEvent
@@ -29,7 +30,7 @@ export default function EventCard({ event, currentUser }: Props) {
       {event.images.length > 0 && (
         <figure>
           {event.images.map((src, i) => (
-            <img
+            <Image
               key={`image-${i}`}
               src={src}
               alt={EVENT_CARD.IMAGE_ALT(i, event.title)}

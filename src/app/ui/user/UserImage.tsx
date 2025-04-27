@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import DefaultUser from '../icons/DefaultUser'
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 
 export default function UserImage({ image, name }: Props) {
   return image ? (
-    <img src={image} alt={name ?? 'User'} className="pfp" />
+    <Image src={image} alt={name ?? 'User'} className="pfp" />
   ) : (
     <DefaultUser />
   )
