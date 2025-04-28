@@ -1,9 +1,9 @@
 export const METADATA = {
   LAYOUTS: {
     HOME: {
-      TITLE: 'Events Manager',
+      TITLE: 'TicketXPress',
       DESCRIPTION:
-        'Events manager is a page built with Next.js, React, TailwindCSS, Node.js, and Prisma. Designed for users to buy tickets for events',
+        'TicketXPress is a page built with Next.js, React, TailwindCSS, Node.js, and Prisma. Designed for users to buy tickets for events',
     },
     USER: {
       TITLE: "'s Profile",
