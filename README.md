@@ -7,6 +7,8 @@ Este es un proyecto de **venta de entradas para eventos** desarrollado con **Nex
 > ⚠️ Esta web es un **proyecto educativo** y **no representa un e-commerce real**. Los eventos son ficticios y no se llevarán a cabo.  
 > 💸 Las compras realizadas utilizan **dinero real** mediante la API de Mercado Pago, por lo tanto **no se aceptan reclamos, devoluciones ni compensaciones** por el uso indebido de la plataforma.
 
+Puedes acceder a la pagina desde este enlace: [TicketXPress](https://ticket-xpress-eta.vercel.app/)
+
 ## Características
 
 - **Autenticación con NextAuth.js**:
@@ -114,6 +116,8 @@ This is a **ticket-selling platform for events** built with **Next.js**. It allo
 
 > ⚠️ This website is an **educational project** and **does not represent a real e-commerce**. All events are fictional and will not take place.  
 > 💸 Purchases are made using **real money** through the Mercado Pago API, so **no claims, refunds, or compensations** will be accepted for misuse of the platform.
+
+You can see the page using this link: [TicketXPress](https://ticket-xpress-eta.vercel.app/)
 
 ## Features
 
