@@ -4,6 +4,9 @@ export const METADATA = {
       TITLE: 'TicketXPress',
       DESCRIPTION:
         'TicketXPress is a page built with Next.js, React, TailwindCSS, Node.js, and Prisma. Designed for users to buy tickets for events',
+      URL: 'https://ticketxpress.facundochiappero.online/',
+      PREVIEW_URL: 'https://ticketxpress.facundochiappero.online/preview.webp',
+      TYPE: 'website' as const,
     },
     USER: {
       TITLE: "'s Profile",
