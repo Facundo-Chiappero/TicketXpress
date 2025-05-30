@@ -9,8 +9,26 @@ export const metadata: Metadata = {
     template: `${METADATA.LAYOUTS.HOME.TITLE} - %s`,
   },
   description: METADATA.LAYOUTS.HOME.DESCRIPTION,
-  icons: {
-    icon: '/favicon.png',
+  openGraph: {
+    title: METADATA.LAYOUTS.HOME.TITLE,
+    description: METADATA.LAYOUTS.HOME.DESCRIPTION,
+    url: METADATA.LAYOUTS.HOME.URL,
+    images: [
+      {
+        url: METADATA.LAYOUTS.HOME.PREVIEW_URL,
+        width: 1200,
+        height: 630,
+        alt: METADATA.LAYOUTS.HOME.TITLE,
+      },
+    ],
+    siteName: METADATA.LAYOUTS.HOME.TITLE,
+    type: METADATA.LAYOUTS.HOME.TYPE,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: METADATA.LAYOUTS.HOME.TITLE,
+    description: METADATA.LAYOUTS.HOME.DESCRIPTION,
+    images: METADATA.LAYOUTS.HOME.PREVIEW_URL,
   },
 }
 
