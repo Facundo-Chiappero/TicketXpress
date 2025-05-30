@@ -39,6 +39,10 @@ export default function PasswordInput({
         type="button"
         onClick={updateVisibility}
         className="w-fit bottom-1 right-1 absolute text-white"
+        name="toggle visibility"
+        title="toggle visibility"
+        aria-label={passwordVisible ? 'Hide Password' : 'Show Password'}
+        aria-pressed={passwordVisible}
       >
         {passwordVisible ? <Eye /> : <EyeOff />}
       </button>
